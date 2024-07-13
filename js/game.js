@@ -360,7 +360,7 @@ function generateHeartIcons() {
       const heartImg = document.createElement("img");
       heartImg.id = `heart${i}`;
       heartImg.className = "heartIcon";
-      heartImg.src = "/images/heart.svg";
+      heartImg.src = "../../images/heart.svg";
       heartsContainer.appendChild(heartImg);
     }
   }
@@ -431,7 +431,7 @@ async function newGame(gameDict) {
   roundsText.innerHTML = createRoundsText(livesCount);
   generateHeartIcons();
 
-  console.log(correctElo, gameDict.Site, gameDict);
+  // console.log(correctElo, gameDict.Site, gameDict);
   setUpEloButtons(correctElo, eloMinRange, eloMaxRange);
   adjustScreen();
   clearCountdown();

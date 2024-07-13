@@ -2,7 +2,7 @@ export const gamesURL =
   "https://prod-10.canadacentral.logic.azure.com:443/workflows/3743959082264b67ab1ae67e9c5ea9e5/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=Mt6-ZTQqYIDMjFvFGoww501ijDbMzrOYvKm0Z-FvrVM";
 export const keyURL =
   "https://prod-27.canadacentral.logic.azure.com:443/workflows/f819df0e0efe4f79be6ae77b127a25d9/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=a40r_8GKKlZM6Xee9KEwqCT2eaeMIBEj3IfuMwJtMKc";
-export const streakIconHTML = `<IMG class="streakIcon" SRC="/images/fire.gif"></IMG>`;
+export const streakIconHTML = `<IMG class="streakIcon" SRC="../../images/fire.gif"></IMG>`;
 export const incorrectGuessReponse = [
   "Incorrect",
   "Wrong guess",
