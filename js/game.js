@@ -137,7 +137,7 @@ function updateResultScreen() {
     }
   } else {
     if (maxRounds === 3) {
-      if (correctCount === 1) {
+      if (correctCount <= 1) {
         resultHeader.textContent = getRandomElement(resultHeaderNegative);
       } else if (correctCount === 2) {
         resultHeader.textContent = getRandomElement(resultHeaderPositive);
