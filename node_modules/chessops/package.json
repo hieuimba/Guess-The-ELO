@@ -1,0 +1,122 @@
+{
+  "name": "chessops",
+  "version": "0.12.7",
+  "description": "Chess and chess variant rules and operations",
+  "keywords": [
+    "chess",
+    "lichess",
+    "fen",
+    "pgn",
+    "uci",
+    "typescript"
+  ],
+  "repository": "github:niklasf/chessops",
+  "author": "Niklas Fiekas <niklas.fiekas@backscattering.de>",
+  "funding": "https://github.com/sponsors/niklasf",
+  "license": "GPL-3.0-or-later",
+  "module": "index.js",
+  "types": "index.d.ts",
+  "type": "module",
+  "sideEffects": false,
+  "dependencies": {
+    "@badrap/result": "^0.2"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29",
+    "@typescript-eslint/eslint-plugin": "^5",
+    "@typescript-eslint/parser": "^5",
+    "eslint": "^8",
+    "jest": "^29",
+    "prettier": "^2",
+    "ts-jest": "^29",
+    "typedoc": "^0.24",
+    "typescript": "^5"
+  },
+  "scripts": {
+    "prepare": "tsc",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "doc": "typedoc src/types.ts src/attacks.ts src/util.ts src/squareSet.ts src/board.ts src/setup.ts src/chess.ts src/compat.ts src/debug.ts src/fen.ts src/san.ts src/transform.ts src/variant.ts src/pgn.ts",
+    "lint": "eslint src/*.ts",
+    "format": "prettier --write .",
+    "check-format": "prettier --check ."
+  },
+  "files": [
+    "attacks.js",
+    "board.js",
+    "chess.js",
+    "compat.js",
+    "variant.js",
+    "transform.js",
+    "setup.js",
+    "squareSet.js",
+    "types.js",
+    "util.js",
+    "debug.js",
+    "fen.js",
+    "san.js",
+    "pgn.js",
+    "index.js",
+    "attacks.d.ts",
+    "board.d.ts",
+    "chess.d.ts",
+    "compat.d.ts",
+    "variant.d.ts",
+    "transform.d.ts",
+    "setup.d.ts",
+    "squareSet.d.ts",
+    "types.d.ts",
+    "util.d.ts",
+    "debug.d.ts",
+    "fen.d.ts",
+    "san.d.ts",
+    "pgn.d.ts",
+    "index.d.ts",
+    "attacks.js.map",
+    "board.js.map",
+    "chess.js.map",
+    "compat.js.map",
+    "variant.js.map",
+    "transform.js.map",
+    "setup.js.map",
+    "squareSet.js.map",
+    "types.js.map",
+    "util.js.map",
+    "debug.js.map",
+    "fen.js.map",
+    "san.js.map",
+    "pgn.js.map",
+    "index.js.map",
+    "src/attacks.ts",
+    "src/board.ts",
+    "src/chess.ts",
+    "src/compat.ts",
+    "src/variant.ts",
+    "src/transform.ts",
+    "src/setup.ts",
+    "src/squareSet.ts",
+    "src/types.ts",
+    "src/util.ts",
+    "src/debug.ts",
+    "src/fen.ts",
+    "src/san.ts",
+    "src/pgn.ts",
+    "src/index.ts"
+  ],
+  "jest": {
+    "testRegex": ".*\\.test\\.ts$",
+    "transform": {
+      "\\.ts$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "moduleNameMapper": {
+      "^(.*)\\.js$": "$1"
+    }
+  }
+}

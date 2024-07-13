@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Guess The ELO</title>
+
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link href="node_modules/lichess-pgn-viewer/dist/lichess-pgn-viewer.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.slate.min.css" />
+</head>
+
+<body>
+
+
+    <div id="shade">
+        <div id="homeScreen">
+            <div id="homeHeader">
+                <div id="settings">
+                    <button id="aboutButton">About</button>
+                    <button id="musicToggleButton">
+                        <svg id="musicToggle" xmlns:dc="http://purl.org/dc/elements/1.1/"
+                            xmlns:cc="http://creativecommons.org/ns#"
+                            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                            xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="26" height="28"
+                            id="svg4110" version="1.1">
+                            <g id="layer1" transform="scale(0.035, 0.035) translate(0,-400)">
+                                <g transform="matrix(1.0871732,0,0,1.0871732,-155.7732,195.33037)"
+                                    style="display:inline" id="g4087">
+                                    <path sodipodi:nodetypes="ccccc" inkscape:connector-curvature="0" id="rect4002"
+                                        d="m 301.42856,312.42213 372.68414,-76 0,103.92858 -372.68414,76 z"
+                                        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+                                    <rect y="312.34177" x="301.42856" height="388.5" width="60" id="rect3964"
+                                        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+                                    <path
+                                        transform="matrix(0.77274066,-0.20705524,0.24886447,0.92877483,273.33148,240.33751)"
+                                        d="m -40,470.36218 c 0,43.07821 -55.964406,78 -125,78 -69.03559,0 -125,-34.92179 -125,-78 0,-43.07821 55.96441,-78 125,-78 69.035594,0 125,34.92179 125,78 z"
+                                        sodipodi:ry="78" sodipodi:rx="125" sodipodi:cy="470.36218" sodipodi:cx="-165"
+                                        id="path4005" style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                        sodipodi:type="arc" />
+                                    <rect y="248.87701" x="614.11267" height="388.5" width="60" id="rect3964-3"
+                                        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline" />
+                                    <path
+                                        transform="matrix(0.77274066,-0.20705524,0.24886447,0.92877483,586.01559,176.87275)"
+                                        d="m -40,470.36218 c 0,43.07821 -55.964406,78 -125,78 -69.03559,0 -125,-34.92179 -125,-78 0,-43.07821 55.96441,-78 125,-78 69.035594,0 125,34.92179 125,78 z"
+                                        sodipodi:ry="78" sodipodi:rx="125" sodipodi:cy="470.36218" sodipodi:cx="-165"
+                                        id="path4005-7"
+                                        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline"
+                                        sodipodi:type="arc" />
+                                    <line x1="265.165" y1="323.223" x2="647.13" y2="711.031" id="strikeLine"
+                                        style="stroke-width: 55; stroke: rgb(255, 0, 0); stroke-linecap: round; transform-box: fill-box; transform-origin: 50% 50%;">
+                                    </line>
+                                </g>
+
+                            </g>
+                        </svg>
+                    </button>
+
+                </div>
+            </div>
+            <div id="title">
+                <span>Guess The ELO</span>
+            </div>
+            <div id="gameModes">
+                <button class="gameModesButtons" id="singlePlayerButton">
+                    <div>Singleplayer</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" id="pawnIcon" viewBox="0 0 45 45"
+                        preserveAspectRatio="xMidYMid meet">
+                        <path
+                            d="M22.5 9c-2.21 0-4 1.79-4 4 0 .89.29 1.71.78 2.38C17.33 16.5 16 18.59 16 21c0 2.03.94 3.84 2.41 5.03-3 1.06-7.41 5.55-7.41 13.47h23c0-7.92-4.41-12.41-7.41-13.47 1.47-1.19 2.41-3 2.41-5.03 0-2.41-1.33-4.5-3.28-5.62.49-.67.78-1.49.78-2.38 0-2.21-1.79-4-4-4z"
+                            stroke-width="1.5" stroke-linecap="round" transform="scale(1.05, 1)" />
+                    </svg>
+                </button>
+                <div></div> <!-- Empty div for spacing -->
+                <button class="gameModesButtons" id="multiPlayerButton">
+                    <div>Multiplayer</div>
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" id="knightIcon" viewBox="0 0 45 45"
+                        preserveAspectRatio="xMidYMid meet">
+                        <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10c10.5 1 16.5 8 16 29H15c0-9 10-6.5 8-21" />
+                            <path
+                                d="M24 18c.38 2.91-5.55 7.37-8 9-3 2-2.82 4.34-5 4-1.042-.94 1.41-3.04 0-3-1 0 .19 1.23-1 2-1 0-4.003 1-4-4 0-2 6-12 6-12s1.89-1.9 2-3.5c-.73-.994-.5-2-.5-3 1-1 3 2.5 3 2.5h2s.78-1.992 2.5-3c1 0 1 3 1 3" />
+                        </g>
+                        <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M9.5 25.5a.5.5 0 1 1-1 0 .5.5 0 1 1 1 0zm5.433-9.75a.5 1.5 30 1 1-.866-.5.5 1.5 30 1 1 .866.5z" />
+                        </g>
+                    </svg>
+
+                </button>
+                <div></div> <!-- Empty div for spacing -->
+                <button class="gameModesButtons" id="privateRoomButton">
+                    <div id="privateRoomButtonLabel">Create Private Room</div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" id="knightIcon" viewBox="0 0 45 45"
+                        preserveAspectRatio="xMidYMid meet">
+                        <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 39h27v-3H9v3zm3.5-7l1.5-2.5h17l1.5 2.5h-20zm-.5 4v-4h21v4H12z"
+                                stroke-linecap="butt" />
+                            <path d="M14 29.5v-13h17v13H14z" stroke-linecap="butt" stroke-linejoin="miter" />
+                            <path d="M14 16.5L11 14h23l-3 2.5H14zM11 14V9h4v2h5V9h5v2h5V9h4v5H11z"
+                                stroke-linecap="butt" />
+                            <path d="M12 35.5h21m-20-4h19m-18-2h17m-17-13h17M11 14h23" fill="none" stroke-width="1"
+                                stroke-linejoin="miter" />
+                        </g>
+                    </svg>
+
+                </button>
+            </div>
+            <div id="optionsMenu">
+                <!-- singlePlayerOptions -->
+                <div id="singlePlayerOptions">
+                    <div class="optionTitle">Options</div>
+                    <div id="singlePlayerOptionsContainer">
+                        <div id="roundsOptions" class="singlePlayerOptionButtons">
+                            <div id="roundsLabel">Rounds</div>
+                            <button id="roundsPrev" class="optionNavButton">
+                                <svg class="triangle" viewBox="0 0 48 41" style=" transform: rotate(-90deg);">
+                                    <path d="M 24 4 L 43 37 L 5 37 z" />
+                                </svg>
+                            </button>
+                            <div id="roundsSelection"></div>
+                            <!-- <div id="roundsNext">&#9654;</div> -->
+                            <button id="roundsNext" class="optionNavButton">
+                                <svg class="triangle" viewBox="0 0 48 41" style=" transform: rotate(90deg);">
+                                    <path d="M 24 4 L 43 37 L 5 37 z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="evalOptions" class="singlePlayerOptionButtons">
+                            <div id="evalLabel">Difficulty</div>
+                            <button id="evalPrev" class="optionNavButton">
+                                <svg class="triangle" viewBox="0 0 48 41" style=" transform: rotate(-90deg);">
+                                    <path d="M 24 4 L 43 37 L 5 37 z" />
+                                </svg>
+                            </button>
+                            <div id="evalSelection"></div>
+                            <button id="evalNext" class="optionNavButton">
+                                <svg class="triangle" viewBox="0 0 48 41" style=" transform: rotate(90deg);">
+                                    <path d="M 24 4 L 43 37 L 5 37 z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="timeControlOptions" class="singlePlayerOptionButtons">
+                            <div id="timeControlLabel">Time Control</div>
+                            <button id="timeControlPrev" class="optionNavButton">
+                                <svg class="triangle" viewBox="0 0 48 41" style=" transform: rotate(-90deg);">
+                                    <path d="M 24 4 L 43 37 L 5 37 z" />
+                                </svg>
+                            </button>
+                            <div id="timeControlSelection"></div>
+                            <button id="timeControlNext" class="optionNavButton">
+                                <svg class="triangle" viewBox="0 0 48 41" style=" transform: rotate(90deg);">
+                                    <path d="M 24 4 L 43 37 L 5 37 z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                    </div>
+                    <button id="singlePlayerStartButton" class="startButton">Start Game</button>
+                </div>
+                <!-- multiPlayerOptions -->
+                <div id="multiPlayerOptions" style="display: none">
+                    <div class="optionTitle">Coming Soon</div>
+                    <div class="optionPlaceholder"></div>
+                    <button id="multiplayerStartButton" class="startButton">Find Match</button>
+                </div>
+                <!-- privateRoomOptions -->
+                <div id="privateRoomOptions" style="display: none">
+                    <div class="optionTitle">Coming Soon</div>
+                    <div class="optionPlaceholder"></div>
+                    <button id="privateRoomButton" class="startButton">Create Room</button>
+                </div>
+            </div>
+            <div id="aboutScreen" style="display: none">
+                <div>
+                    <p>Guess the Elo is a game where you guess the rating (Elo) of a given chess game. </p>
+                    <p> Test your chess knowledge and intuition by earning the most points across all rounds or
+                        surviving the longest in endless mode! </p>
+                    <p>
+                        Challenge yourself further with the Hard difficulty, where the evaluation bar is removed, and
+                        you have less time for each guess.
+                    </p>
+
+                    <p>**Elo ratings for all games are collected from Lichess, which starts at 1500, following the
+                        Glicko
+                        system definition</p>
+
+                    <p>Have fun!</p>
+                    <br>
+                    <!-- <br> -->
+                    <!-- <p>Guess the Elo sources a large collection of games from Lichess every month to ensure variety and
+                        relevance. If you're interested in how that works, check out this data pipeline
+                        <a href="https://github.com/hieuimba/Lichess-Spark-DataPipeline" target="_blank">here</a>
+                    </p> -->
+                    <button id="backToMenuButton">Back to Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="gameScreen" style="display: none">
+            <div id="gameHeader">
+                <div id="clock"></div>
+                <div id="gameMode"></div>
+                <div id="rounds">
+                    <div id="roundsText"></div>
+                    <div id="heartsContainer"> </div>
+                </div>
+                <div id="score"></div>
+            </div>
+            <div id="boardContainer">
+                <div></div>
+                <div id="answerBanner">
+                    <div id="answerBannerContent"></div>
+                </div>
+                <progress id="countdownBar" value="50" max="100"></progress>
+            </div>
+            <div id="eloButtonsContainer">
+                <button id="eb1" class="eloButton"></button>
+                <button id="eb2" class="eloButton"></button>
+                <button id="eb3" class="eloButton"></button>
+                <button id="eb4" class="eloButton"></button>
+            </div>
+
+
+            <button id="nextGameButton" style="display: none">Next Game</button>
+            <button id="viewResultButton" style="display: none">View Results</button>
+        </div>
+        <div id="resultScreen" style="display:none">
+            <div id="resultBanner">
+                <div id="resultHeader">Well Played!</div>
+                <div id="resultSummary"></div>
+
+            </div>
+            <div id="resultDetails">
+                <div id="yourScoreText">Your Score</div>
+                <div id="totalScore"></div>
+                <div id="resultDetailsContainer">
+                    <hr>
+                    </hr>
+                    <hr>
+                    </hr>
+                    <div id="totalBaseScore">Base Score:</div>
+                    <div id="totalBaseScoreValue"></div>
+                    <div id="totalStreakBonus">Streak Bonus:</div>
+                    <div id="totalStreakBonusValue"></div>
+                    <div id="longestSreak">Longest Streak:</div>
+                    <div id="longestStreakValue"></div>
+                </div>
+
+            </div>
+            <button id="mainMenuButton">Main Menu</button>
+        </div>
+        <div id="footer">
+            <div id="credits">
+                <button id="creditsButton">Credits</button>
+                <dialog id="creditModal">
+                    <article>
+                        <header>
+                            <button aria-label="Close" rel="prev"></button>
+                        </header>
+                        <p>Guess the ELO is made possible by the free chess games and open-source chess board from
+                            Lichess:
+                        </p>
+                        <p>
+                            <a href="https://database.lichess.org" target="_blank">https://database.lichess.org</a>
+                            <br>
+                            <a href="https://github.com/lichess-org/pgn-viewer"
+                                target="_blank">https://github.com/lichess-org/pgn-viewer</a>
+                        </p>
+                        <br>
+                        <p>Music:</p>
+
+                        <p> Lobby Time by Kevin MacLeod
+                            (<a href="https://incompetech.com" target="_blank">https://incompetech.com</a>)
+                            <br>
+                            Licensed under Creative Commons: By Attribution 3.0
+                            <a href="https://github.com/hieuimba/"
+                                target="_blank">http://creativecommons.org/licenses/by/3.0</a>
+                        </p>
+                    </article>
+                </dialog>
+            </div>
+            <div id="contact">
+                <button id="contactButton">Contact</button>
+                <dialog id="contactModal">
+                    <article>
+                        <header>
+                            <button aria-label="Close" rel="prev"></button>
+                        </header>
+                        <p>Thank you for your interest!
+                        </p>
+                        If you have any feedback or questions, feel free to email me at: <a
+                            href="mailto:hieuimba@gmail.com">hieuimba@gmail.com</a>
+                        </p>
+                        </p>
+                        Check out my other projects here: <a href="https://github.com/hieuimba"
+                            target="_blank">https://github.com/hieuimba</a>
+                        </p>
+                    </article>
+                </dialog>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <script defer src="js/index.js" type="module"></script> -->
+
+    <audio id="music" src="sounds/music.mp3" preload="auto" loop></audio>
+    <audio id="correctSound" src="sounds/effects/correct.wav" preload="auto"></audio>
+    <audio id="incorrectSound" src="sounds/effects/incorrect.wav" preload="auto"></audio>
+    <audio id="gameEndSound" src="sounds/effects/game-end.wav" preload="auto"></audio>
+    <audio id="gameStartSound" src="sounds/effects/game-start.wav" preload="auto"></audio>
+    <audio id="countdownSound" src="sounds/effects/countdown-new.wav" preload="auto"></audio>
+    <script defer src="node_modules/hacktimer/HackTimer.min.js" type="module"></script>
+
+    <script defer src="js/home.js" type="module"></script>
+    <script defer src="js/game.js" type="module"></script>
+    <script defer src="js/other/resize.js" type="module"></script>
+    <script defer src="js/elements/modal.js" type="module"></script>
+</body>
+
+
+</html>
