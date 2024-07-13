@@ -47,17 +47,11 @@ async function fetchKeys() {
 
 function getDistinctTimeControls(keyData) {
   // Default array to store distinct events
-  const distinctEvents = [
-    "UltraBullet",
-    "Bullet",
-    "Blitz",
-    "Rapid",
-    "Classical",
-  ];
+  const distinctEvents = ["Bullet", "Blitz", "Rapid", "Classical"];
 
   keyData.forEach((item) => {
-    // Check if the event already exists in the distinctEvents array
-    if (!distinctEvents.includes(item.Event)) {
+    // Check if the event already exists in the distinctEvents array (not "UltraBullet" for testing)
+    if (item.Event !== "UltraBullet" && !distinctEvents.includes(item.Event)) {
       // If not, add it to the array
       distinctEvents.push(item.Event);
     }

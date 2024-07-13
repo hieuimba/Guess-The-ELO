@@ -186,27 +186,27 @@ function updateCapturedPieces(capturedList) {
   capturedList.forEach((captured) => {
     if (captured == "p") {
       const piece = document.createElement("img");
-      piece.src = "images/mini-pawn.svg";
+      piece.src = "images/mini-pieces/mini-pawn.svg";
       piece.classList.add("mini-pawn");
       capturedPawns.append(piece);
     } else if (captured == "b") {
       const piece = document.createElement("img");
-      piece.src = "images/mini-bishop.svg";
+      piece.src = "images/mini-pieces/mini-bishop.svg";
       piece.classList.add("mini-bishop");
       capturedBishops.append(piece);
     } else if (captured == "n") {
       const piece = document.createElement("img");
-      piece.src = "images/mini-knight.svg";
+      piece.src = "images/mini-pieces/mini-knight.svg";
       piece.classList.add("mini-knight");
       capturedKnights.append(piece);
     } else if (captured == "r") {
       const piece = document.createElement("img");
-      piece.src = "images/mini-rook.svg";
+      piece.src = "images/mini-pieces/mini-rook.svg";
       piece.classList.add("mini-rook");
       capturedRooks.append(piece);
     } else if (captured == "q") {
       const piece = document.createElement("img");
-      piece.src = "images/mini-queen.svg";
+      piece.src = "images/mini-pieces/mini-queen.svg";
       piece.classList.add("mini-queen");
       capturedQueens.append(piece);
     }
@@ -434,7 +434,7 @@ function updateAnnotateIcon(annotateType, currentSquare) {
   }
   const cgContainer = document.querySelector("cg-container");
   const annotateIcon = document.createElement("img");
-  annotateIcon.src = "images/" + annotateType + ".svg";
+  annotateIcon.src = "images/annotate-icons/" + annotateType + ".svg";
   annotateIcon.style.position = "absolute";
   annotateIcon.style.width = "8%";
   annotateIcon.style.height = "8%";

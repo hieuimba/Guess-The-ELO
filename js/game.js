@@ -360,7 +360,7 @@ function generateHeartIcons() {
       const heartImg = document.createElement("img");
       heartImg.id = `heart${i}`;
       heartImg.className = "heartIcon";
-      heartImg.src = "images/heart.svg";
+      heartImg.src = "images/icons/heart.svg";
       heartsContainer.appendChild(heartImg);
     }
   }
