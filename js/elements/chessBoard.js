@@ -1,5 +1,5 @@
-import LichessPgnViewer from "/node_modules/lichess-pgn-viewer/dist/lichess-pgn-viewer.min.js";
-import { Chess } from "/node_modules/chess.js/dist/esm/chess.js";
+import LichessPgnViewer from "../../node_modules/lichess-pgn-viewer/dist/lichess-pgn-viewer.min.js";
+import { Chess } from "../../node_modules/chess.js/dist/esm/chess.js";
 
 let evalDict;
 let squaresDict;
