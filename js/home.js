@@ -22,6 +22,7 @@ const optionsMenu = document.getElementById("optionsMenu");
 const music = document.getElementById("music");
 const aboutScreen = document.getElementById("aboutScreen");
 const title = document.querySelector("#title span");
+const backToMenuButton = document.getElementById("backToMenuButton");
 
 // Add event listener to each button
 gameModesButtons.forEach((button) => {
@@ -358,17 +359,17 @@ musicToggleButton.addEventListener("click", () => {
 });
 
 aboutButton.addEventListener("click", () => {
-  if (aboutScreen.style.display === "none") {
-    aboutButton.textContent = "Main Menu";
-    gameModes.style.display = "none";
-    optionsMenu.style.display = "none";
-    aboutScreen.style.display = "flex";
-  } else {
-    aboutButton.textContent = "About";
-    gameModes.style.display = "grid";
-    optionsMenu.style.display = "grid";
-    aboutScreen.style.display = "none";
-  }
+  aboutButton.textContent = "";
+  gameModes.style.display = "none";
+  optionsMenu.style.display = "none";
+  aboutScreen.style.display = "flex";
+});
+
+backToMenuButton.addEventListener("click", () => {
+  aboutButton.textContent = "About";
+  gameModes.style.display = "grid";
+  optionsMenu.style.display = "grid";
+  aboutScreen.style.display = "none";
 });
 
 title.addEventListener("click", () => {
