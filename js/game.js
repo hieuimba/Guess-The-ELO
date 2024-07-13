@@ -246,6 +246,7 @@ function setUpEloButtons(correctElo, eloMinRange, eloMaxRange) {
   // Enable buttons
   eloButtons.forEach((btn) => {
     btn.disabled = false;
+    btn.removeAttribute("tabindex");
   });
 
   eloButtons.forEach((button, index) => {
@@ -290,6 +291,8 @@ function eloButtonClickHandler(button, correctElo) {
     if (btn !== button && btn.textContent !== correctElo) {
       btn.disabled = true;
     }
+    btn.setAttribute("tabindex", "-1");
+    btn.blur();
   });
 
   displayNextButton();
@@ -454,7 +457,7 @@ function clearAnswerBanner() {
 
 async function newGame(gameDict) {
   currentRound++;
-  const time = gameDifficulty === "Normal" ? 60 : 30;
+  const time = gameDifficulty === "Normal" ? 60 : 45;
   const evaluation = gameDifficulty === "Normal" ? "Yes" : "No";
   const eloMinRange = gameDifficulty === "Normal" ? 300 : 150;
   const eloMaxRange = gameDifficulty === "Normal" ? 1200 : 1000;

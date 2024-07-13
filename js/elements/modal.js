@@ -15,7 +15,8 @@ let visibleModal = null;
 
 const creditsButton = document.getElementById("creditsButton");
 const contactButton = document.getElementById("contactButton");
-
+const creditsCloseButton = document.getElementById("creditsCloseButton");
+const contactCloseButton = document.getElementById("contactCloseButton");
 creditsButton.addEventListener("click", (event) => {
   event.preventDefault();
   const modal = document.getElementById("creditModal");
@@ -23,7 +24,21 @@ creditsButton.addEventListener("click", (event) => {
   modal && (modal.open ? closeModal(modal) : openModal(modal));
 });
 
+creditsCloseButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const modal = document.getElementById("creditModal");
+  if (!modal) return;
+  modal && (modal.open ? closeModal(modal) : openModal(modal));
+});
+
 contactButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const modal = document.getElementById("contactModal");
+  if (!modal) return;
+  modal && (modal.open ? closeModal(modal) : openModal(modal));
+});
+
+contactCloseButton.addEventListener("click", (event) => {
   event.preventDefault();
   const modal = document.getElementById("contactModal");
   if (!modal) return;

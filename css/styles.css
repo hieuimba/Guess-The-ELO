@@ -166,7 +166,12 @@ body {
 /* Game Modes */
 #gameModes {
   display: grid;
-  grid-template-columns: 1fr 2vw 1fr 2vw 1fr;
+  grid-template-columns:
+    1fr
+    clamp(0.3rem, -0.989rem + 5.978vw, 2rem)
+    1fr
+    clamp(0.3rem, -0.989rem + 5.978vw, 2rem)
+    1fr; /* min 345 max 800 */
   align-items: center;
   margin-bottom: clamp(
     2.533rem,
