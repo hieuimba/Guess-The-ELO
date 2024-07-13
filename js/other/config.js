@@ -57,4 +57,28 @@ export const timeOutResponse = [
   "Time's up, try again!",
 ];
 
-('<a href="https://www.freepik.com/free-vector/heart_35202442.htm#query=heart%20svg&position=4&from_view=keyword&track=ais_user&uuid=67153dc6-2210-499e-8df2-92c426cccd05">Image by juicy_fish</a> on Freepik');
+export const resultHeaderPositive = [
+  "Nice attempt!",
+  "Well played!",
+  "Congratulations!",
+  "Well done!",
+  "Good game!",
+  "Solid run!",
+];
+
+export const resultHeaderAllCorrect = [
+  "Perfect game!",
+  "Outstanding!",
+  "Brilliant!",
+  "Amazing job!",
+  "Well played!",
+  "Impressive!",
+];
+
+export const resultHeaderNegative = [
+  "Good effort!",
+  "You're getting there!",
+  "Good game!",
+  "Nice try!",
+  "Better luck next time!",
+];

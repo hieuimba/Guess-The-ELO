@@ -23,6 +23,9 @@ import {
   correctGuessReponse,
   correctGuessReponseStreak,
   timeOutResponse,
+  resultHeaderAllCorrect,
+  resultHeaderNegative,
+  resultHeaderPositive,
 } from "./other/config.js";
 
 const singlePlayerStartButton = document.getElementById(
@@ -123,6 +126,43 @@ mainMenuButton.addEventListener("click", () => {
 });
 
 function updateResultScreen() {
+  const resultHeader = document.getElementById("resultHeader");
+  if (maxRounds > 10) {
+    if (currentRound > 10) {
+      resultHeader.textContent = getRandomElement(resultHeaderAllCorrect);
+    } else if (currentRound > 3) {
+      resultHeader.textContent = getRandomElement(resultHeaderPositive);
+    } else {
+      resultHeader.textContent = getRandomElement(resultHeaderNegative);
+    }
+  } else {
+    if (maxRounds === 3) {
+      if (correctCount === 1) {
+        resultHeader.textContent = getRandomElement(resultHeaderNegative);
+      } else if (correctCount === 2) {
+        resultHeader.textContent = getRandomElement(resultHeaderPositive);
+      } else {
+        resultHeader.textContent = getRandomElement(resultHeaderAllCorrect);
+      }
+    } else if (maxRounds === 5) {
+      if (correctCount <= 2) {
+        resultHeader.textContent = getRandomElement(resultHeaderNegative);
+      } else if (correctCount > 2 && correctCount <= 3) {
+        resultHeader.textContent = getRandomElement(resultHeaderPositive);
+      } else {
+        resultHeader.textContent = getRandomElement(resultHeaderAllCorrect);
+      }
+    } else if (maxRounds === 10) {
+      if (correctCount <= 2) {
+        resultHeader.textContent = getRandomElement(resultHeaderNegative);
+      } else if (correctCount > 2 && correctCount <= 8) {
+        resultHeader.textContent = getRandomElement(resultHeaderPositive);
+      } else {
+        resultHeader.textContent = getRandomElement(resultHeaderAllCorrect);
+      }
+    }
+  }
+
   const resultSummary = document.getElementById("resultSummary");
   if (maxRounds > 10) {
     resultSummary.textContent = `You made it to round ${currentRound}!`;
