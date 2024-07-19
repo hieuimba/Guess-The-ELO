@@ -1,5 +1,4 @@
-import { distinctTimeControlOptions } from "./data/fetchKeys.js";
-import { explodeSelections } from "./other/utils.js";
+import { processSelections } from "./other/utils.js";
 
 const gameModesButtons = document.querySelectorAll(".gameModesButtons");
 const singlePlayerButton = document.getElementById("singlePlayerButton");
@@ -53,7 +52,7 @@ gameModesButtons.forEach((button) => {
 });
 
 singlePlayerButton.click();
-
+const distinctTimeControlOptions = ["Bullet", "Blitz", "Rapid", "Classical"];
 const roundsOptions = ["3", "5", "10", "Endless"];
 const timeControlOptions = ["Any", ...distinctTimeControlOptions];
 const evalOptions = ["Normal", "Hard"];
@@ -64,10 +63,7 @@ let optionSelections = {
   evalSelection: evalOptions[0],
 };
 
-export let gameConfigs = explodeSelections(
-  optionSelections,
-  distinctTimeControlOptions
-);
+export let gameConfigs = processSelections(optionSelections);
 
 let roundsOptionsListCurrentIndex = 0;
 let timeControlOptionsListCurrentIndex = 0;
@@ -83,7 +79,7 @@ function updateOptionsSelection(optionLabel, action, valueList, currentIndex) {
 
   document.getElementById(optionLabel).textContent = valueList[currentIndex];
   optionSelections[optionLabel] = valueList[currentIndex];
-  gameConfigs = explodeSelections(
+  gameConfigs = processSelections(
     optionSelections,
     distinctTimeControlOptions,
     evalOptions

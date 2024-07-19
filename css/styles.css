@@ -161,6 +161,7 @@ body {
   border-radius: 5px;
   color: var(--white);
   font-size: clamp(1rem, 0.662rem + 1.569vw, 1.25rem); /* min 345 max 600 */
+  margin-bottom: 1rem;
 }
 
 /* Game Modes */
@@ -638,9 +639,15 @@ cg-board {
 }
 
 /* Board Elements */
-#evalBar {
+#evalBar.white {
   --pico-progress-color: #ffff;
   background-color: #3b3b3b;
+  border: 1px solid #3b3b3b;
+}
+
+#evalBar.black {
+  --pico-progress-color: #3b3b3b;
+  background-color: #ffff;
   border: 1px solid #3b3b3b;
 }
 

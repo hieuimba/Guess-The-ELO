@@ -14,29 +14,28 @@ let countdown;
 export let remainingTimePercentage;
 
 export function startCountdown(secondsLeft, correctElo) {
-  secondsLeft = secondsLeft - 1;
   const totalSecondsLeft = secondsLeft;
-  clock.textContent = totalSecondsLeft + 1;
+  clock.textContent = totalSecondsLeft;
   countdownBar.value = totalSecondsLeft;
   countdownBar.max = totalSecondsLeft;
+  let wholeSecondsLeft;
   updateCountdownColor(green);
 
-  secondsLeft += 0.3;
   countdown = setInterval(() => {
-    secondsLeft -= 0.1; // Subtract 0.01 seconds
-
+    secondsLeft = (secondsLeft - 0.1).toFixed(2); // Subtract 0.1 seconds
+    wholeSecondsLeft = Math.floor(secondsLeft).toFixed(2);
     // Update the visual clock only at whole seconds
-    if (Math.floor(secondsLeft) !== Math.floor(secondsLeft + 0.01)) {
-      clock.textContent = Math.floor(secondsLeft) + 1;
-      document.title = `Guess The ELO - ${Math.floor(secondsLeft) + 1}`;
+    if (secondsLeft === wholeSecondsLeft) {
+      clock.textContent = Math.floor(secondsLeft);
+      document.title = `Guess The ELO - ${Math.floor(secondsLeft)}`;
 
       // Determine remaining time percentage
       const remainingPercentage = secondsLeft / totalSecondsLeft;
       remainingTimePercentage = remainingPercentage;
       // Change color based on remaining time percentage
-      if (remainingPercentage >= 0.5) {
+      if (remainingPercentage > 0.5) {
         updateCountdownColor(green, "#f2f2f2");
-      } else if (remainingPercentage >= 0.25) {
+      } else if (remainingPercentage > 0.25) {
         updateCountdownColor(yellow, "#1F1F1F");
       } else {
         updateCountdownColor(red, "#1F1F1F");

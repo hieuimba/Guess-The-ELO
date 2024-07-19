@@ -49,7 +49,7 @@ export async function initializeChessBoard(moves, orientation, evalEnabled) {
 }
 function cleanMoves(moves) {
   moves = moves.replace(/\([^)]*\)/g, "").replace(/\{[^{}]*best[^{}]*\}/g, "");
-  if (evalEnabledGlobal === "No") {
+  if (!evalEnabledGlobal) {
     moves = moves.replace(/\[\%eval [^\]]+\]|\?|!/g, "");
   }
   return moves;
@@ -103,7 +103,7 @@ function moveObserverCallback(mutations) {
       mutation.target.id === "M1" &&
       mutation.target.classList.length === 0
     ) {
-      if (evalEnabledGlobal === "Yes") {
+      if (evalEnabledGlobal) {
         updateEvalField(0);
         updateEvalBar(0);
       } else {
@@ -321,7 +321,7 @@ function createEvalField() {
 
   const evalField = document.createElement("div");
   evalField.style.gridArea = "eval-field";
-  evalField.textContent = evalEnabledGlobal === "Yes" ? "Eval: 0.00" : "";
+  evalField.textContent = evalEnabledGlobal ? "Eval: 0.00" : "";
 
   evalField.id = "evalField";
   lpv.appendChild(evalField);
@@ -338,16 +338,20 @@ function createEvalBar() {
   // Create a new div element
   const evalBar = document.createElement("progress");
   evalBar.max = 100;
-  evalBar.value = evalEnabledGlobal === "Yes" ? 50 : 0;
+  evalBar.value = evalEnabledGlobal ? 50 : 0;
   // evalBar.style
   evalBar.style.zIndex = "50";
   evalBar.style.margin = "0";
   evalBar.style.transformOrigin = "left top";
   evalBar.style.transform = "rotate(-90deg) translate(-100%, 0)";
   evalBar.style.width = "var(--cg-height)";
-  evalBar.style.color = "#525f7a";
   // Set the id attribute
   evalBar.id = "evalBar";
+  if (orientationGlobal === "white") {
+    evalBar.classList.add("white");
+  } else {
+    evalBar.classList.add("black");
+  }
 
   // Append the evalBar div to the parent element
   lpvBoard.appendChild(evalBar);
@@ -488,7 +492,8 @@ function updateEvalBar(evalNumber) {
   } else {
     const evalPercentage = calcEvalBarPercentage(evalNumber);
     evalBar.style.display = "block";
-    evalBar.value = evalPercentage;
+    evalBar.value =
+      orientationGlobal === "white" ? evalPercentage : 100 - evalPercentage;
   }
 }
 

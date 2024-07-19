@@ -1,5 +1,5 @@
 import { gameConfigs } from "./home.js";
-import { fetchGames, resetUsedGameIDs } from "./data/fetchGames.js";
+import { fetchGames } from "./data/fetchGames.js";
 import {
   initializeChessBoard,
   removeChessBoard,
@@ -47,7 +47,6 @@ const footer = document.getElementById("footer");
 let eloButtonHandlers = {};
 let answerBannerTimeout;
 
-let currentGameIndex = 0;
 let gameArray = [];
 let gameScore = 0;
 let streakCount = 0;
@@ -57,26 +56,29 @@ let totalStreakBonus = 0;
 let longestStreak = 0;
 
 let maxRounds = 0;
-let gameTimeControls = [];
+let gameTimeControls = "";
 let gameDifficulty = "";
-let gameSliceIndexMin = 0;
-let gameSliceIndexMax = gameSliceIndexMin + 20;
 let livesCount = 3;
 let currentRound = 0;
 
+function playSound(elementId) {
+  const audio = document.getElementById(elementId);
+  audio.currentTime = 0; // Rewind clip to start
+  audio.play();
+}
+
 singlePlayerStartButton.addEventListener("click", async () => {
   footer.style.display = "none";
-  document.getElementById("gameStartSound").play();
+  playSound("gameStartSound");
   disableStartGameButton();
   resetVariables();
+  console.log(gameConfigs);
   maxRounds = parseInt(gameConfigs.rounds);
   gameTimeControls = gameConfigs.timeControls;
   gameDifficulty = gameConfigs.difficulty;
-  gameArray = await fetchGames(
-    gameTimeControls.slice(gameSliceIndexMin, gameSliceIndexMax)
-  );
+  gameArray = await fetchGames(gameTimeControls, maxRounds);
 
-  newGame(gameArray[currentGameIndex]);
+  newGame(gameArray[currentRound]);
 
   enableStartGameButton();
   homeScreen.style.display = "none";
@@ -84,30 +86,24 @@ singlePlayerStartButton.addEventListener("click", async () => {
 });
 
 nextGameButton.addEventListener("click", async () => {
-  document.getElementById("gameStartSound").play();
-  currentGameIndex++;
-  if (currentGameIndex < maxRounds) {
-    if (currentGameIndex === gameSliceIndexMax) {
-      gameSliceIndexMin = gameSliceIndexMax - 1;
-      gameSliceIndexMax = gameSliceIndexMin + 21;
-
-      const newGames = await fetchGames(
-        gameTimeControls.slice(gameSliceIndexMin, gameSliceIndexMax)
-      );
-
+  playSound("gameStartSound");
+  console.log(currentRound);
+  console.log(maxRounds);
+  if (currentRound <= maxRounds) {
+    if (currentRound % 20 === 0) {
+      const newGames = await fetchGames(gameTimeControls, 20);
       gameArray.push(...newGames);
-
-      newGame(gameArray[currentGameIndex]);
+      newGame(gameArray[currentRound]);
+    } else {
+      newGame(gameArray[currentRound]);
     }
-    newGame(gameArray[currentGameIndex]);
   }
   clearAnswerBanner();
   nextGameButton.style.display = "none";
 });
 
 viewResultButton.addEventListener("click", () => {
-  document.getElementById("gameEndSound").play();
-
+  playSound("gameEndSound");
   removeChessBoard();
   clearAnswerBanner();
   updateResultScreen();
@@ -236,12 +232,9 @@ function updateResultScreen() {
 
 function setUpEloButtons(correctElo, eloMinRange, eloMaxRange) {
   // Select a random button for the correct answer
-  const wrongChoices = getRandomEloNumbers(
-    parseInt(correctElo),
-    eloMinRange,
-    eloMaxRange
+  const choices = shuffleArray(
+    getRandomEloNumbers(parseInt(correctElo), eloMinRange, eloMaxRange)
   );
-  const choices = shuffleArray([correctElo, ...wrongChoices]);
 
   // Enable buttons
   eloButtons.forEach((btn) => {
@@ -300,7 +293,7 @@ function eloButtonClickHandler(button, correctElo) {
 
 export function displayNextButton() {
   nextGameButton.style.display = "block";
-  if (currentGameIndex === maxRounds - 1 || livesCount === 0) {
+  if (currentRound === maxRounds || livesCount === 0) {
     viewResultButton.style.display = "block";
     nextGameButton.style.display = "none";
   }
@@ -311,7 +304,7 @@ function handleAnswer(answer, eloDiff) {
   const timeBonus = Math.round(500 * remainingTimePercentage);
   let streakBonus = 0;
   if (answer === "Correct") {
-    document.getElementById("correctSound").play();
+    playSound("correctSound");
     correctCount++;
     streakCount++;
     longestStreak = Math.max(longestStreak, streakCount);
@@ -320,7 +313,7 @@ function handleAnswer(answer, eloDiff) {
     updateScoreElement(correctScore + timeBonus, streakBonus);
     totalStreakBonus += streakBonus;
   } else if (answer === "Incorrect") {
-    document.getElementById("incorrectSound").play();
+    playSound("incorrectSound");
     streakCount = 0;
     updateAnswerBannerElement(0, 0, eloDiff);
     updateScoreElement(0, 0);
@@ -387,9 +380,9 @@ function createRoundsText() {
   let roundsText;
 
   if (maxRounds > 10) {
-    roundsText = `Round ${currentGameIndex + 1}`;
+    roundsText = `Round ${currentRound}`;
   } else {
-    roundsText = `${currentGameIndex + 1} of ${maxRounds}`;
+    roundsText = `${currentRound} of ${maxRounds}`;
   }
   return roundsText;
 }
@@ -458,9 +451,7 @@ function clearAnswerBanner() {
 async function newGame(gameDict) {
   currentRound++;
   const time = gameDifficulty === "Normal" ? 60 : 45;
-  const evaluation = gameDifficulty === "Normal" ? "Yes" : "No";
-  const eloMinRange = gameDifficulty === "Normal" ? 300 : 150;
-  const eloMaxRange = gameDifficulty === "Normal" ? 1200 : 1000;
+  const evaluation = gameDifficulty === "Normal" ? true : false;
   const moves = gameDict.Moves;
   const orientation = getRandomElement(["white", "black"]);
   const correctElo =
@@ -475,7 +466,7 @@ async function newGame(gameDict) {
   generateHeartIcons();
 
   console.log(correctElo, gameDict.Site, gameDict);
-  setUpEloButtons(correctElo, eloMinRange, eloMaxRange);
+  setUpEloButtons(correctElo);
   adjustScreen();
   clearCountdown();
   startCountdown(time, correctElo);
@@ -507,7 +498,6 @@ function disableStartGameButton() {
 function resetVariables() {
   answerBannerTimeout;
 
-  currentGameIndex = 0;
   gameArray = [];
   gameScore = 0;
   streakCount = 0;
@@ -516,13 +506,9 @@ function resetVariables() {
   totalStreakBonus = 0;
   longestStreak = 0;
 
-  resetUsedGameIDs();
-
   maxRounds = 0;
-  gameTimeControls = [];
+  gameTimeControls = "";
   gameDifficulty = "";
-  gameSliceIndexMin = 0;
-  gameSliceIndexMax = gameSliceIndexMin + 20;
 
   livesCount = 3;
   currentRound = 0;
