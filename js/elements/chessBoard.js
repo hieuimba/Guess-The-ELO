@@ -340,7 +340,7 @@ function createEvalBar() {
   evalBar.max = 100;
   evalBar.value = evalEnabledGlobal ? 50 : 0;
   // evalBar.style
-  evalBar.style.zIndex = "50";
+  evalBar.style.zIndex = "200";
   evalBar.style.margin = "0";
   evalBar.style.transformOrigin = "left top";
   evalBar.style.transform = "rotate(-90deg) translate(-100%, 0)";

@@ -72,7 +72,6 @@ singlePlayerStartButton.addEventListener("click", async () => {
   playSound("gameStartSound");
   disableStartGameButton();
   resetVariables();
-  console.log(gameConfigs);
   maxRounds = parseInt(gameConfigs.rounds);
   gameTimeControls = gameConfigs.timeControls;
   gameDifficulty = gameConfigs.difficulty;
@@ -87,8 +86,6 @@ singlePlayerStartButton.addEventListener("click", async () => {
 
 nextGameButton.addEventListener("click", async () => {
   playSound("gameStartSound");
-  console.log(currentRound);
-  console.log(maxRounds);
   if (currentRound <= maxRounds) {
     if (currentRound % 20 === 0) {
       const newGames = await fetchGames(gameTimeControls, 20);
@@ -301,7 +298,12 @@ export function displayNextButton() {
 
 function handleAnswer(answer, eloDiff) {
   const correctScore = 1000;
-  const timeBonus = Math.round(500 * remainingTimePercentage);
+  let timeBonus;
+  if (remainingTimePercentage === undefined) {
+    timeBonus = 500;
+  } else {
+    timeBonus = Math.round(500 * remainingTimePercentage);
+  }
   let streakBonus = 0;
   if (answer === "Correct") {
     playSound("correctSound");
@@ -312,6 +314,7 @@ function handleAnswer(answer, eloDiff) {
     updateAnswerBannerElement(correctScore + timeBonus, streakBonus, 0);
     updateScoreElement(correctScore + timeBonus, streakBonus);
     totalStreakBonus += streakBonus;
+    addHeart();
   } else if (answer === "Incorrect") {
     playSound("incorrectSound");
     streakCount = 0;
@@ -320,6 +323,34 @@ function handleAnswer(answer, eloDiff) {
     removeHeart();
   }
   clearCountdown();
+}
+
+function addHeart() {
+  if (maxRounds > 10 && correctCount % 3 === 0 && livesCount < 5) {
+    livesCount++;
+
+    const heartsContainer = document.getElementById("heartsContainer");
+    heartsContainer.innerHTML = ""; // Clear previous contents
+
+    for (let i = 0; i < livesCount; i++) {
+      const heartImg = document.createElement("img");
+      heartImg.id = `heart${i}`;
+      heartImg.className = "heartIcon";
+      heartImg.src = "images/icons/heart.svg";
+      heartsContainer.appendChild(heartImg);
+    }
+    const heart = document.getElementById(`heart${livesCount - 1}`);
+    heart.style.opacity = 0;
+    heart.style.width = 0;
+    heart.style.height = 0;
+
+    heart.style.transition = "width 0.5s, height 0.5s, opacity 0.5s";
+    requestAnimationFrame(() => {
+      heart.style.opacity = 1;
+      heart.style.width = "clamp(0.88rem, 0.582rem + 1.38vw, 1.1rem)";
+      heart.style.height = "clamp(0.88rem, 0.582rem + 1.38vw, 1.1rem)";
+    });
+  }
 }
 
 export function removeHeart() {
@@ -465,7 +496,7 @@ async function newGame(gameDict) {
   roundsText.innerHTML = createRoundsText(livesCount);
   generateHeartIcons();
 
-  console.log(correctElo, gameDict.Site, gameDict);
+  console.log(correctElo, gameDict.Site);
   setUpEloButtons(correctElo);
   adjustScreen();
   clearCountdown();

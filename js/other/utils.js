@@ -67,10 +67,11 @@ export function getRandomEloNumbers(
     correctIndex = 4;
   }
   let c = calcRandomElos(correctIndex);
+  // console.log(a, b);
+  // console.log(c);
   return c;
 }
 
-getRandomEloNumbers(1200, 200, 3500);
 // Get a random int within a range
 export function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -81,7 +82,9 @@ export function getRandomInt(min, max) {
 function repeatAndSumRandomInt(min, max, times) {
   let sum = 0;
   for (let i = 0; i < times; i++) {
-    sum += getRandomInt(min, max);
+    let randomInt = getRandomInt(min, max);
+    sum += randomInt;
+    // console.log(randomInt);
   }
   return sum;
 }

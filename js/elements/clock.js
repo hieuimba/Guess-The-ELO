@@ -19,7 +19,7 @@ export function startCountdown(secondsLeft, correctElo) {
   countdownBar.value = totalSecondsLeft;
   countdownBar.max = totalSecondsLeft;
   let wholeSecondsLeft;
-  updateCountdownColor(green);
+  updateCountdownColor(green, "#f2f2f2");
 
   countdown = setInterval(() => {
     secondsLeft = (secondsLeft - 0.1).toFixed(2); // Subtract 0.1 seconds
