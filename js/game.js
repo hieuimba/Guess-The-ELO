@@ -59,6 +59,7 @@ let maxRounds = 0;
 let gameTimeControls = "";
 let gameDifficulty = "";
 let livesCount = 3;
+let partialLivesCount = 0;
 let currentRound = 0;
 
 function playSound(elementId) {
@@ -76,7 +77,7 @@ singlePlayerStartButton.addEventListener("click", async () => {
   gameTimeControls = gameConfigs.timeControls;
   gameDifficulty = gameConfigs.difficulty;
   gameArray = await fetchGames(gameTimeControls, maxRounds);
-
+  generateHeartIcons();
   newGame(gameArray[currentRound]);
 
   enableStartGameButton();
@@ -299,6 +300,7 @@ export function displayNextButton() {
 function handleAnswer(answer, eloDiff) {
   const correctScore = 1000;
   let timeBonus;
+
   if (remainingTimePercentage === undefined) {
     timeBonus = 500;
   } else {
@@ -309,6 +311,7 @@ function handleAnswer(answer, eloDiff) {
     playSound("correctSound");
     correctCount++;
     streakCount++;
+
     longestStreak = Math.max(longestStreak, streakCount);
     streakBonus = streakCount >= 3 ? streakCount * 100 : 0;
     updateAnswerBannerElement(correctScore + timeBonus, streakBonus, 0);
@@ -326,9 +329,7 @@ function handleAnswer(answer, eloDiff) {
 }
 
 function addHeart() {
-  if (maxRounds > 10 && correctCount % 3 === 0 && livesCount < 5) {
-    livesCount++;
-
+  if (maxRounds > 10 && livesCount < 5) {
     const heartsContainer = document.getElementById("heartsContainer");
     heartsContainer.innerHTML = ""; // Clear previous contents
 
@@ -339,17 +340,54 @@ function addHeart() {
       heartImg.src = "images/icons/heart.svg";
       heartsContainer.appendChild(heartImg);
     }
-    const heart = document.getElementById(`heart${livesCount - 1}`);
-    heart.style.opacity = 0;
-    heart.style.width = 0;
-    heart.style.height = 0;
+    partialLivesCount++;
 
-    heart.style.transition = "width 0.5s, height 0.5s, opacity 0.5s";
-    requestAnimationFrame(() => {
-      heart.style.opacity = 1;
-      heart.style.width = "clamp(0.88rem, 0.582rem + 1.38vw, 1.1rem)";
-      heart.style.height = "clamp(0.88rem, 0.582rem + 1.38vw, 1.1rem)";
-    });
+    if (partialLivesCount % 3 === 0) {
+      livesCount++;
+      const heartImg = document.createElement("img");
+      heartImg.id = `heart${livesCount - 1}`;
+      heartImg.className = "heartIcon";
+      heartImg.src = "images/icons/heart.svg";
+      heartsContainer.appendChild(heartImg);
+      const heart = document.getElementById(`heart${livesCount - 1}`);
+      heart.style.opacity = 0;
+
+      heart.style.transition = "opacity 0.5s";
+      requestAnimationFrame(() => {
+        heart.style.opacity = 1;
+      });
+      partialLivesCount = 0;
+    } else if (partialLivesCount % 3 === 2) {
+      const heartImg = document.createElement("img");
+      heartImg.className = "heartIcon";
+      heartImg.id = "heart-mid";
+      heartImg.src = "images/icons/heart-mid.svg";
+      heartsContainer.appendChild(heartImg);
+      const heart = document.getElementById(`heart-mid`);
+      heart.style.opacity = 0;
+
+      heart.style.transition = "opacity 0.5s";
+      requestAnimationFrame(() => {
+        heart.style.opacity = 1;
+      });
+    } else if (partialLivesCount % 3 === 1) {
+      const heartImg = document.createElement("img");
+      heartImg.className = "heartIcon";
+      heartImg.id = "heart-low";
+      heartImg.src = "images/icons/heart-low.svg";
+      heartsContainer.appendChild(heartImg);
+      const heart = document.getElementById(`heart-low`);
+      heart.style.opacity = 0;
+      heart.style.width = 0;
+      heart.style.height = 0;
+
+      heart.style.transition = "width 0.5s, height 0.5s, opacity 0.5s";
+      requestAnimationFrame(() => {
+        heart.style.opacity = 1;
+        heart.style.width = "clamp(0.88rem, 0.582rem + 1.38vw, 1.1rem)";
+        heart.style.height = "clamp(0.88rem, 0.582rem + 1.38vw, 1.1rem)";
+      });
+    }
   }
 }
 
@@ -494,7 +532,6 @@ async function newGame(gameDict) {
   timeControl.textContent = `${gameDict.Event} ${gameDict.TimeControl}`;
   score.innerHTML = createScoreText(gameScore);
   roundsText.innerHTML = createRoundsText(livesCount);
-  generateHeartIcons();
 
   console.log(correctElo, gameDict.Site);
   setUpEloButtons(correctElo);

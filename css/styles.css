@@ -575,6 +575,12 @@ cg-board {
   font-size: 0.9rem;
 }
 
+.lpv .lpv__player {
+  /* font size of moves in the sidebar */
+  padding-left: 0.2rem;
+  padding-right: 0.5rem;
+}
+
 .lpv__menu {
   font-size: 1.2rem;
 }

@@ -183,6 +183,11 @@ function updateCapturedPieces(capturedList) {
   const capturedBishops = document.createElement("div");
   const capturedRooks = document.createElement("div");
   const capturedQueens = document.createElement("div");
+  capturedPawns.style.display = "flex";
+  capturedKnights.style.display = "flex";
+  capturedBishops.style.display = "flex";
+  capturedRooks.style.display = "flex";
+  capturedQueens.style.display = "flex";
   capturedList.forEach((captured) => {
     if (captured == "p") {
       const piece = document.createElement("img");
@@ -213,6 +218,7 @@ function updateCapturedPieces(capturedList) {
   });
 
   capturedPieces.style.display = "flex";
+  capturedPieces.style.flexWrap = "nowrap";
   capturedPieces.append(
     capturedPawns,
     capturedKnights,
@@ -340,7 +346,7 @@ function createEvalBar() {
   evalBar.max = 100;
   evalBar.value = evalEnabledGlobal ? 50 : 0;
   // evalBar.style
-  evalBar.style.zIndex = "200";
+  evalBar.style.zIndex = "50";
   evalBar.style.margin = "0";
   evalBar.style.transformOrigin = "left top";
   evalBar.style.transform = "rotate(-90deg) translate(-100%, 0)";
