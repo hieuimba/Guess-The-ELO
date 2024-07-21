@@ -349,14 +349,9 @@ function addHeart() {
       heartImg.className = "heartIcon";
       heartImg.src = "images/icons/heart.svg";
       heartsContainer.appendChild(heartImg);
-      const heart = document.getElementById(`heart${livesCount - 1}`);
-      heart.style.opacity = 0;
-
-      heart.style.transition = "opacity 0.5s";
-      requestAnimationFrame(() => {
-        heart.style.opacity = 1;
-      });
       partialLivesCount = 0;
+      const heart = document.getElementById(`heart${livesCount - 1}`);
+      heart.classList.add("pulse");
     } else if (partialLivesCount % 3 === 2) {
       const heartImg = document.createElement("img");
       heartImg.className = "heartIcon";
@@ -364,12 +359,7 @@ function addHeart() {
       heartImg.src = "images/icons/heart-mid.svg";
       heartsContainer.appendChild(heartImg);
       const heart = document.getElementById(`heart-mid`);
-      heart.style.opacity = 0;
-
-      heart.style.transition = "opacity 0.5s";
-      requestAnimationFrame(() => {
-        heart.style.opacity = 1;
-      });
+      heart.classList.add("pulse");
     } else if (partialLivesCount % 3 === 1) {
       const heartImg = document.createElement("img");
       heartImg.className = "heartIcon";

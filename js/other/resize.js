@@ -54,14 +54,8 @@ function endlessOptionCheck() {
   const div = document.getElementById("roundsSelection");
   if (div.textContent === "Endless") {
     div.classList.add("endlessStyle");
-    div.setAttribute(
-      "data-tooltip",
-      "Start with 3 lives and earn an extra life for every 3 correct guesses"
-    );
-    div.style.borderBottomWidth = 0;
   } else {
     div.classList.remove("endlessStyle");
-    div.removeAttribute("data-tooltip");
   }
 }
 
@@ -74,14 +68,8 @@ function difficultyOptionCheck() {
   const div = document.getElementById("evalSelection");
   if (div.textContent === "Hard") {
     div.classList.add("hardStyle");
-    div.setAttribute(
-      "data-tooltip",
-      "No evaluation clues and reduced time for each guess"
-    );
-    div.style.borderBottomWidth = 0;
   } else {
     div.classList.remove("hardStyle");
-    div.removeAttribute("data-tooltip");
   }
 }
 

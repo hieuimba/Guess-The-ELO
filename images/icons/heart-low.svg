@@ -6,7 +6,7 @@
         <!-- The mask is white for the visible part and black for the masked part -->
         <rect x="0" y="0" width="200%" height="67%" fill="black" />
         <rect x="0" y="66.67%" width="200%" height="34%" fill="black" />
-        <rect x="0" y="90%" width="200%" height="34%" fill="white" />
+        <rect x="0" y="85%" width="200%" height="50%" fill="white" />
     </mask>
 
     <g id="objects" mask="url(#mask)">

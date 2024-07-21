@@ -348,29 +348,9 @@ enableSelectionWheelEvents();
 musicToggleButton.addEventListener("click", () => {
   strikeLine.classList.toggle("animate");
   if (music.paused) {
+    music.volume = 0.7; // Set the volume to 0.5
     music.play();
   } else {
     music.pause();
   }
-});
-
-aboutButton.addEventListener("click", () => {
-  aboutButton.textContent = "";
-  gameModes.style.display = "none";
-  optionsMenu.style.display = "none";
-  aboutScreen.style.display = "flex";
-});
-
-backToMenuButton.addEventListener("click", () => {
-  aboutButton.textContent = "About";
-  gameModes.style.display = "grid";
-  optionsMenu.style.display = "grid";
-  aboutScreen.style.display = "none";
-});
-
-title.addEventListener("click", () => {
-  aboutButton.textContent = "About";
-  gameModes.style.display = "grid";
-  optionsMenu.style.display = "grid";
-  aboutScreen.style.display = "none";
 });
