@@ -570,6 +570,6 @@ function resetVariables() {
 
   livesCount = 3;
   currentRound = 0;
-
+  partialLivesCount = 0;
   document.getElementById("heartsContainer").classList.remove("shrink");
 }
