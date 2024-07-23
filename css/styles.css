@@ -50,7 +50,7 @@ body {
 }
 
 #shade {
-  background-color: #181c2599; /* 181C25 with 60% opacity */
+  background-color: rgba(24, 28, 37, 0.6); /* 181C25 with 60% opacity */
   max-width: 850px;
   width: 100%;
   height: fit-content;
