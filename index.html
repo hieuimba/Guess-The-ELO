@@ -25,7 +25,6 @@
         <div id="homeScreen">
             <div id="homeHeader">
                 <div id="settings">
-                    <!-- <button id="aboutButton">About</button> -->
                     <button id="musicToggleButton">
                         <svg id="musicToggle" xmlns:dc="http://purl.org/dc/elements/1.1/"
                             xmlns:cc="http://creativecommons.org/ns#"
@@ -184,30 +183,6 @@
                     <button id="privateRoomButton" class="startButton">Create Room</button>
                 </div>
             </div>
-            <div id="aboutScreen" style="display: none">
-                <div id="aboutText">
-                    <p>Guess the Elo is a game where you test your chess skills by guessing the rating (Elo) of a chess
-                        match.
-                        Each game consists of several rounds where you will be presented with a random chess game.
-                        Select from
-                        four choices to guess the correct Elo for that match.</P>
-                    <P>Challenge yourself by earning the most points across all rounds or by surviving the longest in
-                        Endless
-                        mode! </p>
-
-                    <p>Elo ratings for all games are collected from Lichess, which starts at 1500, following the
-                        Glicko system definition</p>
-
-
-                    <p>Guess the Elo sources a large collection of games from Lichess every month to ensure game variety
-                        and
-                        relevance. If you're interested in how that works, check out the data pipeline for this game
-                        <a href="https://github.com/hieuimba/Lichess-Spark-DataPipeline" target="_blank">here</a>
-                    </p>
-                    <p>Have fun!</p>
-                </div>
-                <button id="backToMenuButton">Back to Main Menu</button>
-            </div>
         </div>
 
         <div id="gameScreen" style="display: none">
@@ -273,17 +248,20 @@
                         </header>
                         <p>Guess the ELO is made possible by the free chess games and open-source chess board from
                             Lichess:
-                        </p>
-                        <p>
+                            <br>
                             <a href="https://database.lichess.org" target="_blank">https://database.lichess.org</a>
                             <br>
                             <a href="https://github.com/lichess-org/pgn-viewer"
                                 target="_blank">https://github.com/lichess-org/pgn-viewer</a>
                         </p>
                         <br>
-                        <p>Music:</p>
-
-                        <p> Lobby Time by Kevin MacLeod
+                        <p>Data pipeline that extracts and parses Lichess chess games:
+                            <a href="https://github.com/hieuimba/Lichess-Spark-DataPipeline"
+                                target="_blank">https://github.com/hieuimba/Lichess-Spark-DataPipeline</a>
+                        </p>
+                        <br>
+                        <p>Music:
+                            <br> Lobby Time by Kevin MacLeod
                             (<a href="https://incompetech.com" target="_blank">https://incompetech.com</a>)
                             <br>
                             Licensed under Creative Commons: By Attribution 3.0
@@ -291,9 +269,9 @@
                                 target="_blank">http://creativecommons.org/licenses/by/3.0</a>
                         </p>
                         <br>
-                        <p>Images:</p>
-                        <p><a href="https://www.freepik.com/free-vector/heart_35202442.htm">Heart icon
+                        <p>Images:<br><a href="https://www.freepik.com/free-vector/heart_35202442.htm">Heart icon
                                 by juicy_fish</a> on Freepik</p>
+
                     </article>
                 </dialog>
             </div>
@@ -318,10 +296,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- <script defer src="js/index.js" type="module"></script> -->
-
     <audio id="music" src="sounds/music.mp3" preload="auto" loop></audio>
     <audio id="correctSound" src="sounds/effects/correct.wav" preload="auto"></audio>
     <audio id="incorrectSound" src="sounds/effects/incorrect.wav" preload="auto"></audio>
