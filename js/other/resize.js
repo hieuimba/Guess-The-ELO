@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (bodyHeight > viewHeight) {
     alert(
-      "Content exceeds screen size. For the best experience, try Ctrl - to zoom out."
+      "Content exceeds screen size.\nFor the best experience, try Ctrl - to zoom out."
     );
   }
 });
