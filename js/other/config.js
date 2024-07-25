@@ -3,7 +3,6 @@ export const gamesURL =
 export const streakIconHTML = `<IMG class="streakIcon" SRC="images/icons/fire.gif"></IMG>`;
 export const incorrectGuessReponse = [
   "Incorrect",
-  "Wrong guess",
   "Not quite!",
   "Missed it!",
   "Oops, wrong one",
@@ -11,7 +10,7 @@ export const incorrectGuessReponse = [
   "Nice guess, but incorrect!",
   "Wrong answer, better luck next time!",
   "Nope, that's not it",
-  "Oops, try again!",
+  "Good guess, but not quite!",
 ];
 
 export const incorrectGuessReponseClose = [
@@ -26,10 +25,9 @@ export const incorrectGuessReponseClose = [
 export const correctGuessReponse = [
   "Correct!",
   "Awesome!",
-  "Well played!",
   "You got it!",
   "Nailed it",
-  "Greate guess!",
+  "Great guess!",
   "Very nice!",
   "Impressive!",
   "Well done!",
@@ -41,7 +39,7 @@ export const correctGuessReponseStreak = [
   "You're unstoppable!",
   "Fantastic streak, keep going!",
   "You're dominating!",
-  "Awesome streak!",
+  "Impressive streak!",
   "Nice, keep it up!",
 ];
 
@@ -68,7 +66,6 @@ export const resultHeaderAllCorrect = [
   "Perfect game!",
   "Outstanding!",
   "Brilliant!",
-  "Amazing job!",
   "Well played!",
   "Impressive!",
 ];
@@ -76,7 +73,8 @@ export const resultHeaderAllCorrect = [
 export const resultHeaderNegative = [
   "Good effort!",
   "You're getting there!",
-  "Good game!",
+  "Keep trying!",
   "Nice try!",
   "Better luck next time!",
+  "Good game!",
 ];

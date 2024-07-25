@@ -14,14 +14,7 @@ const timeControlPrev = document.getElementById("timeControlPrev");
 const evalNext = document.getElementById("evalNext");
 const evalPrev = document.getElementById("evalPrev");
 const musicToggleButton = document.getElementById("musicToggleButton");
-const strikeLine = document.getElementById("strikeLine");
-const aboutButton = document.getElementById("aboutButton");
-const gameModes = document.getElementById("gameModes");
-const optionsMenu = document.getElementById("optionsMenu");
 const music = document.getElementById("music");
-const aboutScreen = document.getElementById("aboutScreen");
-const title = document.querySelector("#title span");
-const backToMenuButton = document.getElementById("backToMenuButton");
 
 // Add event listener to each button
 gameModesButtons.forEach((button) => {
@@ -53,7 +46,7 @@ gameModesButtons.forEach((button) => {
 
 singlePlayerButton.click();
 const distinctTimeControlOptions = ["Bullet", "Blitz", "Rapid", "Classical"];
-const roundsOptions = ["3", "5", "10", "Endless"];
+const roundsOptions = ["5", "10", "Endless"];
 const timeControlOptions = ["Any", ...distinctTimeControlOptions];
 const evalOptions = ["Normal", "Hard"];
 
@@ -346,9 +339,9 @@ document.getElementById("evalSelection").textContent =
 enableSelectionWheelEvents();
 
 musicToggleButton.addEventListener("click", () => {
-  strikeLine.classList.toggle("animate");
+  musicToggleButton.classList.toggle("active");
   if (music.paused) {
-    music.volume = 0.7; // Set the volume to 0.5
+    music.volume = 0.7; // Set the volume to 0.7
     music.play();
   } else {
     music.pause();

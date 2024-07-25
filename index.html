@@ -3,10 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Guess The ELO</title>
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel=" icon" href="images/favicon.ico" type="image/x-icon">
 
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <link href="node_modules/lichess-pgn-viewer/dist/lichess-pgn-viewer.css" rel="stylesheet" />
@@ -25,46 +24,7 @@
         <div id="homeScreen">
             <div id="homeHeader">
                 <div id="settings">
-                    <button id="musicToggleButton">
-                        <svg id="musicToggle" xmlns:dc="http://purl.org/dc/elements/1.1/"
-                            xmlns:cc="http://creativecommons.org/ns#"
-                            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                            xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="26" height="28"
-                            id="svg4110" version="1.1">
-                            <g id="layer1" transform="scale(0.035, 0.035) translate(0,-400)">
-                                <g transform="matrix(1.0871732,0,0,1.0871732,-155.7732,195.33037)"
-                                    style="display:inline" id="g4087">
-                                    <path sodipodi:nodetypes="ccccc" inkscape:connector-curvature="0" id="rect4002"
-                                        d="m 301.42856,312.42213 372.68414,-76 0,103.92858 -372.68414,76 z"
-                                        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none" />
-                                    <rect y="312.34177" x="301.42856" height="388.5" width="60" id="rect3964"
-                                        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none" />
-                                    <path
-                                        transform="matrix(0.77274066,-0.20705524,0.24886447,0.92877483,273.33148,240.33751)"
-                                        d="m -40,470.36218 c 0,43.07821 -55.964406,78 -125,78 -69.03559,0 -125,-34.92179 -125,-78 0,-43.07821 55.96441,-78 125,-78 69.035594,0 125,34.92179 125,78 z"
-                                        sodipodi:ry="78" sodipodi:rx="125" sodipodi:cy="470.36218" sodipodi:cx="-165"
-                                        id="path4005" style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none"
-                                        sodipodi:type="arc" />
-                                    <rect y="248.87701" x="614.11267" height="388.5" width="60" id="rect3964-3"
-                                        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline" />
-                                    <path
-                                        transform="matrix(0.77274066,-0.20705524,0.24886447,0.92877483,586.01559,176.87275)"
-                                        d="m -40,470.36218 c 0,43.07821 -55.964406,78 -125,78 -69.03559,0 -125,-34.92179 -125,-78 0,-43.07821 55.96441,-78 125,-78 69.035594,0 125,34.92179 125,78 z"
-                                        sodipodi:ry="78" sodipodi:rx="125" sodipodi:cy="470.36218" sodipodi:cx="-165"
-                                        id="path4005-7"
-                                        style="fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline"
-                                        sodipodi:type="arc" />
-                                    <line x1="265.165" y1="323.223" x2="647.13" y2="711.031" id="strikeLine"
-                                        style="stroke-width: 55; stroke: rgb(255, 0, 0); stroke-linecap: round; transform-box: fill-box; transform-origin: 50% 50%;">
-                                    </line>
-                                </g>
-
-                            </g>
-                        </svg>
-                    </button>
-
+                    <button id="musicToggleButton">&#127925;</button>
                 </div>
             </div>
             <div id="title">
@@ -246,32 +206,32 @@
                         <header>
                             <button id="creditsCloseButton" aria-label="Close" rel="prev"></button>
                         </header>
-                        <p>Guess the ELO is made possible by the free chess games and open-source chess board from
-                            Lichess:
-                            <br>
-                            <a href="https://database.lichess.org" target="_blank">https://database.lichess.org</a>
-                            <br>
-                            <a href="https://github.com/lichess-org/pgn-viewer"
-                                target="_blank">https://github.com/lichess-org/pgn-viewer</a>
+                        <p><strong>Guess the ELO</strong> is made possible by the free chess games and open-source
+                            chessboard from Lichess:</p>
+                        <ul>
+                            <li><a href="https://database.lichess.org" target="_blank">Lichess Database</a></li>
+                            <li><a href="https://github.com/lichess-org/pgn-viewer" target="_blank">Lichess PGN
+                                    Viewer</a></li>
+                        </ul>
+                        <p><strong>Data Pipeline</strong> for extracting and parsing chess games from Lichess:
                         </p>
-                        <br>
-                        <p>Data pipeline that extracts and parses chess games from Lichess:
-                            <a href="https://github.com/hieuimba/Lichess-Spark-DataPipeline"
-                                target="_blank">https://github.com/hieuimba/Lichess-Spark-DataPipeline</a>
-                        </p>
-                        <br>
-                        <p>Music:
-                            <br> Lobby Time by Kevin MacLeod
-                            (<a href="https://incompetech.com" target="_blank">https://incompetech.com</a>)
-                            <br>
-                            Licensed under Creative Commons: By Attribution 3.0
-                            <a href="https://github.com/hieuimba/"
-                                target="_blank">http://creativecommons.org/licenses/by/3.0</a>
-                        </p>
-                        <br>
-                        <p>Images:<br><a href="https://www.freepik.com/free-vector/heart_35202442.htm">Heart icon
-                                by juicy_fish</a> on Freepik</p>
-
+                        <ul>
+                            <li><a href="https://github.com/hieuimba/Lichess-Spark-DataPipeline"
+                                    target="_blank">Lichess-Spark-DataPipeline</a></li>
+                        </ul>
+                        <p><strong>Music:</strong></p>
+                        <ul>
+                            <li>"Lobby Time" by Kevin MacLeod (available at <a href="https://incompetech.com"
+                                    target="_blank">incompetech.com</a>)<br>
+                                Licensed under <a href="http://creativecommons.org/licenses/by/3.0"
+                                    target="_blank">Creative Commons: By Attribution 3.0</a></li>
+                        </ul>
+                        <p><strong>Images:</strong></p>
+                        <ul>
+                            <li>Heart icon by juicy_fish on <a
+                                    href="https://www.freepik.com/free-vector/heart_35202442.htm"
+                                    target="_blank">Freepik</a></li>
+                        </ul>
                     </article>
                 </dialog>
             </div>
@@ -284,13 +244,17 @@
                         </header>
                         <p>Thank you for your interest!
                         </p>
-                        If you have any feedback or questions, feel free to email me at: <a
-                            href="mailto:hieuimba@gmail.com">hieuimba@gmail.com</a>
-                        </p>
-                        </p>
-                        Check out my other projects here: <a href="https://github.com/hieuimba"
-                            target="_blank">https://github.com/hieuimba</a>
-                        </p>
+
+                        <p>If you have any feedback or questions, feel free to email me at:</p>
+                        <ul>
+                            <li> <a href="mailto:hieuimba@gmail.com">hieuimba@gmail.com</a></li>
+                        </ul>
+                        <p>Check out my other projects here:</p>
+                        <ul>
+                            <li> <a href="https://github.com/hieuimba" target="_blank">https://github.com/hieuimba</a>
+                            </li>
+                        </ul>
+
                     </article>
                 </dialog>
             </div>

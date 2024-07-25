@@ -2,6 +2,7 @@ import {
   displayNextButton,
   updateAnswerBannerElement,
   removeHeart,
+  endRound,
 } from "../game.js";
 
 const clock = document.getElementById("clock");
@@ -59,6 +60,7 @@ export function startCountdown(secondsLeft, correctElo) {
       updateAnswerBannerElement(0, 0, 0, true);
       removeHeart();
       displayNextButton();
+      endRound();
     }
   }, 100); // Update the clock every 0.01 seconds
 }

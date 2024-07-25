@@ -77,3 +77,23 @@ const difficultyOptionObserver = new MutationObserver(difficultyOptionCheck);
 difficultyOptionObserver.observe(document.getElementById("evalSelection"), {
   childList: true,
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  var body = document.body;
+  var html = document.documentElement;
+
+  var bodyHeight = Math.max(
+    body.scrollHeight,
+    body.offsetHeight,
+    html.clientHeight,
+    html.scrollHeight,
+    html.offsetHeight
+  );
+  var viewHeight = window.innerHeight;
+
+  if (bodyHeight > viewHeight) {
+    alert(
+      "Content exceeds screen size. For the best experience, try Ctrl - to zoom out."
+    );
+  }
+});

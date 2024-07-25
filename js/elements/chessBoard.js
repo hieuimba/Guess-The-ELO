@@ -10,11 +10,17 @@ let orientationGlobal;
 let evalEnabledGlobal;
 const chess = new Chess();
 
-export async function initializeChessBoard(moves, orientation, evalEnabled) {
+export async function initializeChessBoard(
+  moves,
+  orientation,
+  evalEnabled,
+  site
+) {
   evalEnabledGlobal = evalEnabled;
   moves = cleanMoves(moves);
+  const fullPGN = `[Site "` + site + `"] ` + moves;
   const game = {
-    pgn: moves,
+    pgn: fullPGN,
     showPlayers: true,
     menu: {
       getPgn: {

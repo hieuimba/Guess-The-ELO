@@ -62,6 +62,12 @@ let livesCount = 3;
 let partialLivesCount = 0;
 let currentRound = 0;
 
+let roundEnded = false;
+
+export function endRound() {
+  roundEnded = true;
+}
+
 function playSound(elementId) {
   const audio = document.getElementById(elementId);
   audio.currentTime = 0; // Rewind clip to start
@@ -141,7 +147,7 @@ function updateResultScreen() {
     } else if (maxRounds === 5) {
       if (correctCount <= 2) {
         resultHeader.textContent = getRandomElement(resultHeaderNegative);
-      } else if (correctCount > 2 && correctCount <= 3) {
+      } else if (correctCount > 2 && correctCount <= 4) {
         resultHeader.textContent = getRandomElement(resultHeaderPositive);
       } else {
         resultHeader.textContent = getRandomElement(resultHeaderAllCorrect);
@@ -149,7 +155,7 @@ function updateResultScreen() {
     } else if (maxRounds === 10) {
       if (correctCount <= 2) {
         resultHeader.textContent = getRandomElement(resultHeaderNegative);
-      } else if (correctCount > 2 && correctCount <= 8) {
+      } else if (correctCount > 2 && correctCount <= 9) {
         resultHeader.textContent = getRandomElement(resultHeaderPositive);
       } else {
         resultHeader.textContent = getRandomElement(resultHeaderAllCorrect);
@@ -285,7 +291,7 @@ function eloButtonClickHandler(button, correctElo) {
     btn.setAttribute("tabindex", "-1");
     btn.blur();
   });
-
+  endRound(true);
   displayNextButton();
 }
 
@@ -322,7 +328,6 @@ function handleAnswer(answer, eloDiff) {
     playSound("incorrectSound");
     streakCount = 0;
     updateAnswerBannerElement(0, 0, eloDiff);
-    updateScoreElement(0, 0);
     removeHeart();
   }
   clearCountdown();
@@ -513,11 +518,12 @@ async function newGame(gameDict) {
   const evaluation = gameDifficulty === "Normal" ? true : false;
   const moves = gameDict.Moves;
   const orientation = getRandomElement(["white", "black"]);
+  const site = gameDict.Site;
   const correctElo =
     orientation === "white"
       ? gameDict.WhiteElo.toString()
       : gameDict.BlackElo.toString();
-  await initializeChessBoard(moves, orientation, evaluation);
+  await initializeChessBoard(moves, orientation, evaluation, site);
 
   timeControl.textContent = `${gameDict.Event} ${gameDict.TimeControl}`;
   score.innerHTML = createScoreText(gameScore);
@@ -528,6 +534,7 @@ async function newGame(gameDict) {
   adjustScreen();
   clearCountdown();
   startCountdown(time, correctElo);
+  roundEnded = false;
 }
 
 function enableStartGameButton() {
@@ -572,4 +579,54 @@ function resetVariables() {
   currentRound = 0;
   partialLivesCount = 0;
   document.getElementById("heartsContainer").classList.remove("shrink");
+
+  roundEnded = false;
 }
+
+let observer;
+
+function checkForElement() {
+  const element = document.querySelector(
+    "#boardContainer > div.lpv.lpv--moves-auto.lpv--controls-true.lpv--players.lpv--menu > div.lpv__menu.lpv__pane > a:nth-child(4)"
+  );
+  if (element) {
+    // Temporarily disconnect observer
+    observer.disconnect();
+
+    element.style.pointerEvents = "none";
+    element.setAttribute("tabindex", "-1");
+    element.blur();
+    element.textContent = "View on Lichess - disabled";
+
+    // Reconnect observer
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    if (roundEnded) {
+      element.style.pointerEvents = "auto";
+      element.removeAttribute("tabindex");
+
+      // Temporarily disconnect observer again
+      observer.disconnect();
+
+      element.textContent = "View on Lichess ↗️";
+      element.classList.add("enabled");
+
+      // Reconnect observer
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+  }
+}
+
+function observeDocument() {
+  observer = new MutationObserver((mutations) => {
+    mutations.forEach(() => {
+      checkForElement();
+    });
+  });
+
+  // Start observing the document for added nodes
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+// Start observing the document
+observeDocument();
