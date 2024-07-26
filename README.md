@@ -3,6 +3,12 @@
 ![chrome-capture-2024-6-25](https://github.com/user-attachments/assets/22439375-7ff7-4d54-9587-2025f117a835)
 ![chrome-capture-2024-6-25 (1)](https://github.com/user-attachments/assets/aaa6f225-e1e7-4b4c-b136-f47646edc3ad)
 
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/db7e60fb-5c5b-45f9-b825-11e91920d04d" width="100" />
+  <img src="https://github.com/user-attachments/assets/22439375-7ff7-4d54-9587-2025f117a835" width="100" /> 
+  <img src="https://github.com/user-attachments/assets/aaa6f225-e1e7-4b4c-b136-f47646edc3ad" width="100" />
+</p>
+
 ## Play game here:
 https://hieuimba.itch.io/guess-the-elo
 
