@@ -18,10 +18,9 @@ import {
 } from "./home.js";
 import {
   streakIconHTML,
-  incorrectGuessReponse,
-  incorrectGuessReponseClose,
-  correctGuessReponse,
-  correctGuessReponseStreak,
+  incorrectGuessResponse,
+  correctGuessResponse,
+  correctGuessResponseStreak,
   timeOutResponse,
   resultHeaderAllCorrect,
   resultHeaderNegative,
@@ -44,12 +43,14 @@ const eloButtons = document.querySelectorAll("#eloButtonsContainer .eloButton");
 const answerBanner = document.getElementById("answerBanner");
 const answerBannerContent = document.getElementById("answerBannerContent");
 const footer = document.getElementById("footer");
+
 let eloButtonHandlers = {};
 let answerBannerTimeout;
 
 let gameArray = [];
 let gameScore = 0;
 let streakCount = 0;
+let correctElo = 0;
 
 let correctCount = 0;
 let totalStreakBonus = 0;
@@ -64,8 +65,25 @@ let currentRound = 0;
 
 let roundEnded = false;
 
-export function endRound() {
-  roundEnded = true;
+function resetVariables() {
+  gameArray = [];
+  gameScore = 0;
+  streakCount = 0;
+  correctElo = 0;
+
+  correctCount = 0;
+  totalStreakBonus = 0;
+  longestStreak = 0;
+
+  maxRounds = 0;
+  gameTimeControls = "";
+  gameDifficulty = "";
+  livesCount = 3;
+  currentRound = 0;
+  partialLivesCount = 0;
+  document.getElementById("heartsContainer").classList.remove("shrink");
+
+  roundEnded = false;
 }
 
 function playSound(elementId) {
@@ -75,7 +93,6 @@ function playSound(elementId) {
 }
 
 singlePlayerStartButton.addEventListener("click", async () => {
-  footer.style.display = "none";
   playSound("gameStartSound");
   disableStartGameButton();
   resetVariables();
@@ -87,6 +104,7 @@ singlePlayerStartButton.addEventListener("click", async () => {
   newGame(gameArray[currentRound]);
 
   enableStartGameButton();
+  footer.style.display = "none";
   homeScreen.style.display = "none";
   gameScreen.style.display = "block";
 });
@@ -136,15 +154,7 @@ function updateResultScreen() {
       resultHeader.textContent = getRandomElement(resultHeaderNegative);
     }
   } else {
-    if (maxRounds === 3) {
-      if (correctCount <= 1) {
-        resultHeader.textContent = getRandomElement(resultHeaderNegative);
-      } else if (correctCount === 2) {
-        resultHeader.textContent = getRandomElement(resultHeaderPositive);
-      } else {
-        resultHeader.textContent = getRandomElement(resultHeaderAllCorrect);
-      }
-    } else if (maxRounds === 5) {
+    if (maxRounds === 5) {
       if (correctCount <= 2) {
         resultHeader.textContent = getRandomElement(resultHeaderNegative);
       } else if (correctCount > 2 && correctCount <= 4) {
@@ -270,7 +280,7 @@ function eloButtonClickHandler(button, correctElo) {
   }
   if (button.textContent === correctElo) {
     button.classList.add("correctGuess");
-    handleAnswer("Correct");
+    endRound("Correct", button);
   } else {
     button.classList.add("incorrectGuess");
     eloButtons.forEach((button) => {
@@ -278,59 +288,73 @@ function eloButtonClickHandler(button, correctElo) {
         button.classList.add("correctGuess");
       }
     });
-    const eloDiff = Math.abs(
-      parseInt(button.textContent) - parseInt(correctElo)
-    );
-    handleAnswer("Incorrect", eloDiff);
-  }
-  // Disable buttons after selection
-  eloButtons.forEach((btn) => {
-    if (btn !== button && btn.textContent !== correctElo) {
-      btn.disabled = true;
-    }
-    btn.setAttribute("tabindex", "-1");
-    btn.blur();
-  });
-  endRound(true);
-  displayNextButton();
-}
-
-export function displayNextButton() {
-  nextGameButton.style.display = "block";
-  if (currentRound === maxRounds || livesCount === 0) {
-    viewResultButton.style.display = "block";
-    nextGameButton.style.display = "none";
+    endRound("Incorrect", button);
   }
 }
 
-function handleAnswer(answer, eloDiff) {
+export function endRound(answer, button) {
+  roundEnded = true;
+
   const correctScore = 1000;
-  let timeBonus;
 
+  let timeBonus;
   if (remainingTimePercentage === undefined) {
     timeBonus = 500;
   } else {
     timeBonus = Math.round(500 * remainingTimePercentage);
   }
-  let streakBonus = 0;
-  if (answer === "Correct") {
-    playSound("correctSound");
-    correctCount++;
-    streakCount++;
 
-    longestStreak = Math.max(longestStreak, streakCount);
-    streakBonus = streakCount >= 3 ? streakCount * 100 : 0;
-    updateAnswerBannerElement(correctScore + timeBonus, streakBonus, 0);
-    updateScoreElement(correctScore + timeBonus, streakBonus);
-    totalStreakBonus += streakBonus;
-    addHeart();
-  } else if (answer === "Incorrect") {
-    playSound("incorrectSound");
+  let streakBonus = 0;
+
+  // Disable buttons
+  if (answer === "Time") {
     streakCount = 0;
-    updateAnswerBannerElement(0, 0, eloDiff);
+    updateAnswerBannerElement(0, 0, true);
     removeHeart();
+    eloButtons.forEach((btn) => {
+      if (btn.textContent === correctElo) {
+        btn.classList.add("correctGuess");
+      }
+      btn.disabled = true;
+      btn.setAttribute("tabindex", "-1");
+      btn.blur();
+    });
+  } else {
+    if (answer === "Correct") {
+      playSound("correctSound");
+      correctCount++;
+      streakCount++;
+
+      longestStreak = Math.max(longestStreak, streakCount);
+      streakBonus = streakCount >= 3 ? streakCount * 100 : 0;
+      totalStreakBonus += streakBonus;
+
+      updateAnswerBannerElement(correctScore + timeBonus, streakBonus);
+      updateScoreElement(correctScore + timeBonus, streakBonus);
+      addHeart();
+    } else if (answer === "Incorrect") {
+      playSound("incorrectSound");
+      streakCount = 0;
+
+      updateAnswerBannerElement(0, 0);
+      removeHeart();
+    }
+    eloButtons.forEach((btn) => {
+      if (btn !== button && btn.textContent !== correctElo) {
+        btn.disabled = true;
+      }
+      btn.setAttribute("tabindex", "-1");
+      btn.blur();
+    });
   }
+  // Clear countdown
   clearCountdown();
+  // Show next game/ view result button
+  nextGameButton.style.display = "block";
+  if (currentRound === maxRounds || livesCount === 0) {
+    viewResultButton.style.display = "block";
+    nextGameButton.style.display = "none";
+  }
 }
 
 function addHeart() {
@@ -469,7 +493,6 @@ function generateHeartIcons() {
 export function updateAnswerBannerElement(
   addedScore,
   streakBonus,
-  eloDiff,
   timeout = false
 ) {
   clearAnswerBanner();
@@ -477,21 +500,18 @@ export function updateAnswerBannerElement(
     answerBannerContent.textContent = getRandomElement(timeOutResponse);
     answerBanner.classList.add("active", "incorrect");
   } else if (addedScore === 0 && streakBonus === 0) {
-    answerBannerContent.textContent =
-      eloDiff < 200
-        ? getRandomElement(incorrectGuessReponseClose)
-        : getRandomElement(incorrectGuessReponse);
+    answerBannerContent.textContent = getRandomElement(incorrectGuessResponse);
     answerBanner.classList.add("active", "incorrect");
   } else {
     let correctResponse;
     if (streakBonus > 0) {
       correctResponse = getRandomElement([
-        ...Array(3).fill(correctGuessReponseStreak).flat(),
-        ...correctGuessReponse,
+        ...correctGuessResponseStreak,
+        ...correctGuessResponse,
       ]);
       answerBannerContent.innerHTML = `${correctResponse} &nbsp; +${addedScore} points<div id = "streakBonus:">Streak Bonus &nbsp; +${streakBonus} points`;
     } else {
-      correctResponse = getRandomElement(correctGuessReponse);
+      correctResponse = getRandomElement(correctGuessResponse);
       answerBannerContent.innerHTML = `${correctResponse} &nbsp; +${addedScore} points`;
     }
     answerBanner.classList.add("active", "correct");
@@ -514,12 +534,12 @@ function clearAnswerBanner() {
 
 async function newGame(gameDict) {
   currentRound++;
-  const time = gameDifficulty === "Normal" ? 60 : 45;
+  const time = gameDifficulty === "Normal" ? 60 : 10;
   const evaluation = gameDifficulty === "Normal" ? true : false;
   const moves = gameDict.Moves;
   const orientation = getRandomElement(["white", "black"]);
   const site = gameDict.Site;
-  const correctElo =
+  correctElo =
     orientation === "white"
       ? gameDict.WhiteElo.toString()
       : gameDict.BlackElo.toString();
@@ -529,11 +549,10 @@ async function newGame(gameDict) {
   score.innerHTML = createScoreText(gameScore);
   roundsText.innerHTML = createRoundsText(livesCount);
 
-  console.log(correctElo, gameDict.Site);
   setUpEloButtons(correctElo);
   adjustScreen();
   clearCountdown();
-  startCountdown(time, correctElo);
+  startCountdown(time);
   roundEnded = false;
 }
 
@@ -557,30 +576,6 @@ function disableStartGameButton() {
   });
   singlePlayerStartButton.disabled = true;
   singlePlayerStartButton.setAttribute("aria-busy", "true");
-}
-
-// singlePlayerStartButton.click();
-function resetVariables() {
-  answerBannerTimeout;
-
-  gameArray = [];
-  gameScore = 0;
-  streakCount = 0;
-
-  correctCount = 0;
-  totalStreakBonus = 0;
-  longestStreak = 0;
-
-  maxRounds = 0;
-  gameTimeControls = "";
-  gameDifficulty = "";
-
-  livesCount = 3;
-  currentRound = 0;
-  partialLivesCount = 0;
-  document.getElementById("heartsContainer").classList.remove("shrink");
-
-  roundEnded = false;
 }
 
 let observer;

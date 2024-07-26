@@ -1,7 +1,7 @@
 export const gamesURL =
   "https://eastus2.azure.data.mongodb-api.com/app/guess-the-elo-service-odhzbev/endpoint/get_games";
 export const streakIconHTML = `<IMG class="streakIcon" SRC="images/icons/fire.gif"></IMG>`;
-export const incorrectGuessReponse = [
+export const incorrectGuessResponse = [
   "Incorrect",
   "Not quite!",
   "Missed it!",
@@ -13,16 +13,7 @@ export const incorrectGuessReponse = [
   "Good guess, but not quite!",
 ];
 
-export const incorrectGuessReponseClose = [
-  "Just a bit off!",
-  "So close!",
-  "Nearly nailed it!",
-  "Almost perfect!",
-  "Close, but no cigar!",
-  "Good guess, but not quite!",
-];
-
-export const correctGuessReponse = [
+export const correctGuessResponse = [
   "Correct!",
   "Awesome!",
   "You got it!",
@@ -34,12 +25,12 @@ export const correctGuessReponse = [
   "Good job!",
 ];
 
-export const correctGuessReponseStreak = [
+export const correctGuessResponseStreak = [
   "You're on fire!",
   "You're unstoppable!",
   "Fantastic streak, keep going!",
   "You're dominating!",
-  "Impressive streak!",
+  "Good guess!",
   "Nice, keep it up!",
 ];
 
@@ -63,7 +54,7 @@ export const resultHeaderPositive = [
 ];
 
 export const resultHeaderAllCorrect = [
-  "Perfect game!",
+  "You did it!",
   "Outstanding!",
   "Brilliant!",
   "Well played!",

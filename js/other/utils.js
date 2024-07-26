@@ -67,8 +67,6 @@ export function getRandomEloNumbers(
     correctIndex = 4;
   }
   let c = calcRandomElos(correctIndex);
-  // console.log(a, b);
-  // console.log(c);
   return c;
 }
 
@@ -84,7 +82,6 @@ function repeatAndSumRandomInt(min, max, times) {
   for (let i = 0; i < times; i++) {
     let randomInt = getRandomInt(min, max);
     sum += randomInt;
-    // console.log(randomInt);
   }
   return sum;
 }

@@ -38,10 +38,10 @@ export async function initializeChessBoard(
 
   chess.loadPgn(moves);
   const history = chess.history({ verbose: true });
-
   evalDict = extractEval(history, moves);
   squaresDict = extractSquares(history);
   pieceAvantageDict = extractPieceAdvantage(history);
+
   currentMoveGlobal = undefined;
   currentAnnotateTypeGlobal = undefined;
   orientationGlobal = orientation;
@@ -50,9 +50,9 @@ export async function initializeChessBoard(
   createEvalBar();
   addMovesObserver();
   addBoardSizeObserver();
-
   clearAnnotateIcon();
 }
+
 function cleanMoves(moves) {
   moves = moves.replace(/\([^)]*\)/g, "").replace(/\{[^{}]*best[^{}]*\}/g, "");
   if (!evalEnabledGlobal) {
@@ -116,7 +116,6 @@ function moveObserverCallback(mutations) {
         updateEvalField(undefined);
         updateEvalBar(undefined);
       }
-
       clearAnnotateIcon();
     }
   });
@@ -313,7 +312,6 @@ function extractEval(history, moves) {
 
   // Convert iterator to an array
   const evalValues = Array.from(matches, (match) => match[1]);
-
   const evalDict = {};
 
   history.forEach((item, index) => {
@@ -334,7 +332,6 @@ function createEvalField() {
   const evalField = document.createElement("div");
   evalField.style.gridArea = "eval-field";
   evalField.textContent = evalEnabledGlobal ? "Eval: 0.00" : "";
-
   evalField.id = "evalField";
   lpv.appendChild(evalField);
 }
@@ -344,28 +341,24 @@ function createEvalBar() {
 
   lpvBoard.style.display = "grid";
   lpvBoard.style.setProperty("grid-template-areas", '"board-inner eval"');
-
   lpvBoard.style.setProperty("grid-template-columns", "98% 1%");
 
-  // Create a new div element
   const evalBar = document.createElement("progress");
   evalBar.max = 100;
   evalBar.value = evalEnabledGlobal ? 50 : 0;
-  // evalBar.style
   evalBar.style.zIndex = "50";
   evalBar.style.margin = "0";
   evalBar.style.transformOrigin = "left top";
   evalBar.style.transform = "rotate(-90deg) translate(-100%, 0)";
   evalBar.style.width = "var(--cg-height)";
-  // Set the id attribute
   evalBar.id = "evalBar";
+
   if (orientationGlobal === "white") {
     evalBar.classList.add("white");
   } else {
     evalBar.classList.add("black");
   }
 
-  // Append the evalBar div to the parent element
   lpvBoard.appendChild(evalBar);
 }
 

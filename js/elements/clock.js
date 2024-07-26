@@ -1,20 +1,14 @@
-import {
-  displayNextButton,
-  updateAnswerBannerElement,
-  removeHeart,
-  endRound,
-} from "../game.js";
+import { endRound } from "../game.js";
 
 const clock = document.getElementById("clock");
 const countdownBar = document.getElementById("countdownBar");
-const eloButtons = document.querySelectorAll("#eloButtonsContainer .eloButton");
 const green = "#398712";
 const yellow = "#FF9500";
 const red = "#D93526";
 let countdown;
 export let remainingTimePercentage;
 
-export function startCountdown(secondsLeft, correctElo) {
+export function startCountdown(secondsLeft) {
   const totalSecondsLeft = secondsLeft;
   clock.textContent = totalSecondsLeft;
   countdownBar.value = totalSecondsLeft;
@@ -50,17 +44,7 @@ export function startCountdown(secondsLeft, correctElo) {
     if (secondsLeft <= 0) {
       clock.textContent = "0";
       document.title = `Guess The ELO - Time Out!`;
-      clearCountdown();
-      eloButtons.forEach((button) => {
-        if (button.textContent === correctElo) {
-          button.classList.add("correctGuess");
-        }
-        button.disabled = true;
-      });
-      updateAnswerBannerElement(0, 0, 0, true);
-      removeHeart();
-      displayNextButton();
-      endRound();
+      endRound("Time");
     }
   }, 100); // Update the clock every 0.01 seconds
 }

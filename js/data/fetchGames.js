@@ -7,7 +7,6 @@ export async function fetchGames(timeControlSelection, roundsSelection) {
   try {
     const response = await fetch(gamesURLWithParam);
     const responseData = await response.json();
-    console.log("fetched games", responseData);
     return responseData;
   } catch (error) {
     console.error("Error sending data:", error);

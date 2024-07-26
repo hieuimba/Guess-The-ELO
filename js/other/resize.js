@@ -78,7 +78,7 @@ difficultyOptionObserver.observe(document.getElementById("evalSelection"), {
   childList: true,
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
   var body = document.body;
   var html = document.documentElement;
 
