@@ -1,9 +1,9 @@
 # Guess-The-ELO
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/eff2c113-1304-4f6b-817d-ea1678af628d" width="33%" /> 
-  <img src="https://github.com/user-attachments/assets/22439375-7ff7-4d54-9587-2025f117a835" width="33%" /> 
-  <img src="https://github.com/user-attachments/assets/aaa6f225-e1e7-4b4c-b136-f47646edc3ad" width="33%" />
+  <img src="https://github.com/user-attachments/assets/eff2c113-1304-4f6b-817d-ea1678af628d" width="32%" /> 
+  <img src="https://github.com/user-attachments/assets/22439375-7ff7-4d54-9587-2025f117a835" width="32%" /> 
+  <img src="https://github.com/user-attachments/assets/aaa6f225-e1e7-4b4c-b136-f47646edc3ad" width="32%" />
 </p>
 
 ## Play game here:
