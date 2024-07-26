@@ -1,7 +1,6 @@
 # Guess-The-ELO
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/73f3d430-9e35-4631-b371-cb72bdfe23f7" width="32%" />
   <img src="https://github.com/user-attachments/assets/22439375-7ff7-4d54-9587-2025f117a835" width="32%" /> 
   <img src="https://github.com/user-attachments/assets/aaa6f225-e1e7-4b4c-b136-f47646edc3ad" width="32%" />
 </p>
