@@ -1,4 +1,4 @@
-## Guess The ELO
+# Guess The ELO
 
 <p float="left">
   <img src="https://github.com/user-attachments/assets/1ebf474a-65d4-455a-bf56-f831978bd95b" width="32%" /> 
