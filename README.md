@@ -16,7 +16,7 @@ Guess the Elo is a game where you can test your chess skills by guessing the Elo
 - Earn points for accurate guesses
 - Challenge yourself in two game modes:
   - Classic: Aim for the highest score across a set number of rounds
-  - Endless: See how long you can survive with 3 lives.
+  - Endless: Survive with 3 lives, earn more as you guess correctly
 
 ## Note
 - Elo ratings from Lichess start at 1500, following the Glicko rating system
