@@ -534,7 +534,7 @@ function clearAnswerBanner() {
 
 async function newGame(gameDict) {
   currentRound++;
-  const time = gameDifficulty === "Normal" ? 60 : 10;
+  const time = gameDifficulty === "Normal" ? 60 : 45;
   const evaluation = gameDifficulty === "Normal" ? true : false;
   const moves = gameDict.Moves;
   const orientation = getRandomElement(["white", "black"]);
@@ -548,6 +548,8 @@ async function newGame(gameDict) {
   timeControl.textContent = `${gameDict.Event} ${gameDict.TimeControl}`;
   score.innerHTML = createScoreText(gameScore);
   roundsText.innerHTML = createRoundsText(livesCount);
+
+  console.log(correctElo, site);
 
   setUpEloButtons(correctElo);
   adjustScreen();
