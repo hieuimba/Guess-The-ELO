@@ -12,7 +12,7 @@ Guess the Elo is a quiz game where you guess the Elo rating of a chess match. Te
 
 ## How To Play
 - Each round presents you with a random chess game
-- Choose from four options to guess the correct Elo rating 
+- Select from four choices to guess the correct Elo rating 
 - Earn points for accurate guesses
 - Challenge yourself in two game modes:
   - Classic: Aim for the highest score across a set number of rounds
