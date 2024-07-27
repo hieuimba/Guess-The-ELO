@@ -24,7 +24,7 @@ jobs:
     
     - name: Deploy to itch.io
       env:
-        BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
       run: |
         ./butler push game.zip hieuimba/guess-the-elo:html5
         
