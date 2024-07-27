@@ -1,4 +1,5 @@
 # Guess The ELO
+Play here - https://hieuimba.itch.io/guess-the-elo
 
 <p float="left">
   <img src="https://github.com/user-attachments/assets/1ebf474a-65d4-455a-bf56-f831978bd95b" width="32%" /> 
@@ -6,10 +7,8 @@
   <img src="https://github.com/user-attachments/assets/aaa6f225-e1e7-4b4c-b136-f47646edc3ad" width="32%" />
 </p>
 
-Play game here: https://hieuimba.itch.io/guess-the-elo
-
 ## Description
-Guess the Elo is a game where you can test your chess knowledge and intuition by guessing the Elo rating of a chess match.
+Guess the Elo is a game where you can test your chess skills by guessing the Elo rating of a chess match.
 
 ## How It Works
 - Each round presents you with a random chess game from Lichess 
