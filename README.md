@@ -10,7 +10,7 @@
 https://hieuimba.itch.io/guess-the-elo
 
 ## Description
-Guess the Elo is a chess-based game that challenges your ability to assess player skill levels. Can you accurately guess the Elo rating of a chess match just by watching the moves?
+Guess the Elo is a game where you can test your chess knowledge and intuition by guessing the Elo rating of a chess match.
 
 ## How It Works
 - Each round presents you with a random chess game from Lichess 
@@ -22,7 +22,7 @@ Guess the Elo is a chess-based game that challenges your ability to assess playe
 
 ## Note
 - Elo ratings from Lichess start at 1500, following the Glicko system definition.
-- Thousands of chess games are sourced from Lichess every month to ensure game variety and relevance. If you're interested in how that works, check out the data pipeline for this game here: https://github.com/hieuimba/Lichess-Spark-DataPipeline
+- Guess the Elo sources a large collection of games from Lichess every month to ensure game variety and relevance. If you're interested in how that works, check out the data pipeline for this game here: https://github.com/hieuimba/Lichess-Spark-DataPipeline
 
 Have fun!
 
