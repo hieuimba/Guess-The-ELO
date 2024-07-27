@@ -16,7 +16,7 @@ Guess the Elo is a quiz game where you guess the Elo rating of a chess match. Te
 - Earn points for accurate guesses
 - Challenge yourself in two game modes:
   - Classic: Aim for the highest score across a set number of rounds
-  - Endless: Survive with 3 lives, earn more as you guess correctly
+  - Endless: Survive with 3 lives, earn more lives as you guess correctly
 
 ## Note 
 - Guess the Elo sources a large collection of games from Lichess every month to ensure game variety and relevance. If you're interested in how that works, check out the data pipeline for this game here: https://github.com/hieuimba/Lichess-Spark-DataPipeline
