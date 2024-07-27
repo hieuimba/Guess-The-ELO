@@ -22,4 +22,4 @@ Guess the Elo is a game where you can test your chess skills by guessing the Elo
 - Elo ratings from Lichess start at 1500, following the Glicko rating system
 - Guess the Elo sources a large collection of games from Lichess every month to ensure game variety and relevance. If you're interested in how that works, check out the data pipeline for this game here: https://github.com/hieuimba/Lichess-Spark-DataPipeline
 
-<h2 style="border-bottom: 0;">Have fun!</h2>
+###Have fun!
