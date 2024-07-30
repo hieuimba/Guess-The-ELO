@@ -20,7 +20,7 @@ Guess the Elo is a casual quiz game where you guess the Elo rating of a chess ma
 ## Note
 All Elo ratings are from Lichess, which starts at 1500.
 
-## The Data
+## Data Source
 Guess the Elo sources a large collection of games from Lichess every month to ensure game variety and relevance. If you're interested in how that works, check out the data pipeline for this game here: https://github.com/hieuimba/Lichess-Spark-DataPipeline
 
 ## Have fun!
