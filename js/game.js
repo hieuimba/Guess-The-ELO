@@ -549,8 +549,6 @@ async function newGame(gameDict) {
   score.innerHTML = createScoreText(gameScore);
   roundsText.innerHTML = createRoundsText(livesCount);
 
-  console.log(correctElo, site);
-
   setUpEloButtons(correctElo);
   adjustScreen();
   clearCountdown();
