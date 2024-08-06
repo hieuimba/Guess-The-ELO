@@ -14,7 +14,7 @@ Guess the Elo is a casual quiz game where you guess the Elo rating of a chess ma
 
 ## How To Play
 
-- Each round presents you with a random chess game along with four possible Elo ratings for that match.
+- Each round presents you with a random chess game along with four Elo ratings for that match.
 - Guess the correct Elo rating to earn points.
 - Challenge yourself in two game modes:
   - Classic: Aim for the highest score across a set number of rounds.
@@ -26,4 +26,4 @@ Note: All Elo ratings are from Lichess, which starts at 1500.
 
 ## Data Source
 
-Guess the Elo sources a large collection of games from Lichess every month to ensure game variety and relevance. If you're interested in how that works, check out the data pipeline for this game here: https://github.com/hieuimba/Lichess-Spark-DataPipeline
+Guess the Elo sources a large collection of games from Lichess every month to ensure that games are always diverse and up-to-date. If you're interested in how that works, check out the data pipeline for this game here: https://github.com/hieuimba/Lichess-Spark-DataPipeline
