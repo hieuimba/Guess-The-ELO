@@ -15,7 +15,7 @@ Play here - https://hieuimba.itch.io/guess-the-elo
 ## Features
 
 - Large collection of chess games: Curated from Lichess’s database and updated monthly
-- Wide ELO range to guess from: from 200 to 3000!
+- Wide ELO range to guess from: from 200 to 3000 ELO!
 - Two game modes:
     - Classic: Aim for the highest score across a set number of rounds.
     - Endless: Start with 3 lives and try to survive as long as possible. Earn additional lives with correct guesses.
@@ -27,12 +27,14 @@ Play here - https://hieuimba.itch.io/guess-the-elo
 
 ## How To Play
 
-- Each round presents you with a random chess game along with four Elo ratings for that match.
+- Each round presents you with a random chess game along with four Elo ratings for that match. 
+
 - Guess the correct Elo rating to earn points.
+
+- All Elo ratings are from Lichess, which starts at 1500.
 
 Have fun!
 
-Note: All Elo ratings are from Lichess, which starts at 1500.
 
 ## Data Source
 
