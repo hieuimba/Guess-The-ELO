@@ -13,6 +13,8 @@ const timeControlNext = document.getElementById("timeControlNext");
 const timeControlPrev = document.getElementById("timeControlPrev");
 const evalNext = document.getElementById("evalNext");
 const evalPrev = document.getElementById("evalPrev");
+const timeLimitNext = document.getElementById("timeLimitNext");
+const timeLimitPrev = document.getElementById("timeLimitPrev");
 const musicToggleButton = document.getElementById("musicToggleButton");
 const music = document.getElementById("music");
 
@@ -48,19 +50,21 @@ singlePlayerButton.click();
 const distinctTimeControlOptions = ["Bullet", "Blitz", "Rapid", "Classical"];
 const roundsOptions = ["5", "10", "Endless"];
 const timeControlOptions = ["Any", ...distinctTimeControlOptions];
-const evalOptions = ["Normal", "Hard"];
+const timeLimitOptions = ["None", "90s", "45s"];
+const evalOptions = ["Yes", "No"];
 
 let optionSelections = {
   roundsSelection: roundsOptions[0],
   timeControlSelection: timeControlOptions[0],
   evalSelection: evalOptions[0],
+  timeLimitSelection: timeLimitOptions[0],
 };
-
 export let gameConfigs = processSelections(optionSelections);
 
 let roundsOptionsListCurrentIndex = 0;
 let timeControlOptionsListCurrentIndex = 0;
 let evalOptionsListCurrentIndex = 0;
+let timeLimitOptionsListCurrentIndex = 0;
 let intervalId;
 
 function updateOptionsSelection(optionLabel, action, valueList, currentIndex) {
@@ -72,11 +76,7 @@ function updateOptionsSelection(optionLabel, action, valueList, currentIndex) {
 
   document.getElementById(optionLabel).textContent = valueList[currentIndex];
   optionSelections[optionLabel] = valueList[currentIndex];
-  gameConfigs = processSelections(
-    optionSelections,
-    distinctTimeControlOptions,
-    evalOptions
-  );
+  gameConfigs = processSelections(optionSelections);
   return currentIndex;
 }
 
@@ -162,6 +162,24 @@ evalPrev.addEventListener("click", () => {
   );
 });
 
+timeLimitNext.addEventListener("click", () => {
+  timeLimitOptionsListCurrentIndex = updateOptionsSelection(
+    "timeLimitSelection",
+    "next",
+    timeLimitOptions,
+    timeLimitOptionsListCurrentIndex
+  );
+});
+
+timeLimitPrev.addEventListener("click", () => {
+  timeLimitOptionsListCurrentIndex = updateOptionsSelection(
+    "timeLimitSelection",
+    "prev",
+    timeLimitOptions,
+    timeLimitOptionsListCurrentIndex
+  );
+});
+
 // Start continuous update on mousedown
 roundsNext.addEventListener("mousedown", () => {
   startContinuousUpdate(
@@ -214,6 +232,24 @@ evalPrev.addEventListener("mousedown", () => {
     "prev",
     evalOptions,
     evalOptionsListCurrentIndex
+  );
+});
+
+timeLimitNext.addEventListener("mousedown", () => {
+  startContinuousUpdate(
+    "timeLimitSelection",
+    "next",
+    timeLimitOptions,
+    timeLimitOptionsListCurrentIndex
+  );
+});
+
+timeLimitPrev.addEventListener("mousedown", () => {
+  startContinuousUpdate(
+    "timeLimitSelection",
+    "prev",
+    timeLimitOptions,
+    timeLimitOptionsListCurrentIndex
   );
 });
 
@@ -304,6 +340,33 @@ const evalWheelEvent = (event) => {
   }, 200);
 };
 
+const timeLimitWheelEvent = (event) => {
+  event.preventDefault(); // Prevent default scrolling behavior
+  if (event.deltaY > 0) {
+    // Scroll down
+    timeLimitOptionsListCurrentIndex = updateOptionsSelection(
+      "timeLimitSelection",
+      "next",
+      timeLimitOptions,
+      timeLimitOptionsListCurrentIndex
+    );
+    timeLimitNext.classList.add("active");
+  } else if (event.deltaY < 0) {
+    // Scroll up
+    timeLimitOptionsListCurrentIndex = updateOptionsSelection(
+      "timeLimitSelection",
+      "prev",
+      timeLimitOptions,
+      timeLimitOptionsListCurrentIndex
+    );
+    timeLimitPrev.classList.add("active");
+  }
+  setTimeout(() => {
+    timeLimitNext.classList.remove("active");
+    timeLimitPrev.classList.remove("active");
+  }, 200);
+};
+
 export function enableSelectionWheelEvents() {
   document
     .getElementById("evalSelection")
@@ -314,6 +377,9 @@ export function enableSelectionWheelEvents() {
   document
     .getElementById("timeControlSelection")
     .addEventListener("wheel", timeControlWheelEvent);
+  document
+    .getElementById("timeLimitSelection")
+    .addEventListener("wheel", timeLimitWheelEvent);
 }
 
 export function disableSelectionWheelEvents() {
@@ -326,6 +392,9 @@ export function disableSelectionWheelEvents() {
   document
     .getElementById("timeControlSelection")
     .removeEventListener("wheel", timeControlWheelEvent);
+  document
+    .getElementById("timeLimitSelection")
+    .removeEventListener("wheel", timeLimitWheelEvent);
 }
 
 // Initialize the selections with the first value
@@ -335,7 +404,8 @@ document.getElementById("timeControlSelection").textContent =
   optionSelections.timeControlSelection;
 document.getElementById("evalSelection").textContent =
   optionSelections.evalSelection;
-
+document.getElementById("timeLimitSelection").textContent =
+  optionSelections.timeLimitSelection;
 enableSelectionWheelEvents();
 
 musicToggleButton.addEventListener("click", () => {

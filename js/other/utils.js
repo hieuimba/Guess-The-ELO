@@ -94,8 +94,9 @@ export function processSelections(selections) {
       : selections.roundsSelection;
   const processedSelections = {
     rounds: selections.roundsSelection,
-    difficulty: selections.evalSelection,
+    evaluation: selections.evalSelection,
     timeControls: selections.timeControlSelection,
+    timeLimit: selections.timeLimitSelection,
   };
 
   return processedSelections;

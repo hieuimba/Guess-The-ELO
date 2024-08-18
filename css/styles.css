@@ -92,7 +92,6 @@ body {
     clamp(0.5rem, -0.75rem + 4vw, 1.25rem); /* min 500 max 800 */
   color: var(--white);
 }
-
 #settings {
   display: flex;
   justify-content: right;
@@ -158,8 +157,8 @@ body {
   align-items: center;
   margin-bottom: clamp(
     2.533rem,
-    0.82rem + 7.948vw,
-    3.8rem
+    1.495rem + 4.813vw,
+    3.3rem
   ); /* min 345 max 600 */
 }
 
@@ -272,7 +271,7 @@ body {
   cursor: pointer;
   color: var(--white);
   font-size: 1.25rem;
-  margin-top: clamp(2.4rem, 1.588rem + 3.765vw, 3rem);
+  margin-top: clamp(2rem, 1.459rem + 2.51vw, 2.4rem); /* min 345 max 600 */
 }
 
 .startButton:hover {
@@ -282,7 +281,7 @@ body {
 /* Options - Title & Layout */
 .optionTitle {
   font-size: clamp(1.5rem, 0.485rem + 4.706vw, 2.25rem); /* min 345 max 600 */
-  margin-bottom: clamp(1.6rem, 1.059rem + 2.51vw, 2rem); /* min 345 max 600 */
+  margin-bottom: clamp(2rem, 1.459rem + 2.51vw, 2.4rem); /* min 345 max 600 */
 }
 
 #singlePlayerOptions,
@@ -296,13 +295,13 @@ body {
 
 #singlePlayerOptionsContainer {
   display: grid;
-  grid-template-rows: repeat(3, auto);
+  grid-template-rows: repeat(4, auto);
   grid-template-columns:
     clamp(6.8rem, 3.824rem + 13.804vw, 9rem) /* min 345 max 600 */
     auto
     clamp(6.8rem, 3.824rem + 13.804vw, 9rem) /* min 345 max 600 */
     auto;
-  row-gap: clamp(1.6rem, 1.059rem + 2.51vw, 2rem); /* min 345 max 600 */
+  row-gap: clamp(1.2rem, 0.659rem + 2.51vw, 1.6rem); /* min 345 max 600 */
 }
 
 .singlePlayerOptionButtons {
@@ -311,33 +310,32 @@ body {
 
 #roundsLabel,
 #timeControlLabel,
-#evalLabel {
+#evalLabel,
+#timeLimitLabel {
   grid-column: 1;
 }
 
 #roundsPrev,
 #timeControlPrev,
-#evalPrev {
+#evalPrev,
+#timeLimitPrev {
   grid-column: 2;
 }
 
 #roundsSelection,
 #timeControlSelection,
-#evalSelection {
+#evalSelection,
+#timeLimitSelection {
   grid-column: 3;
   text-align: center;
+  cursor: default;
 }
 
 #roundsNext,
 #timeControlNext,
-#evalNext {
+#evalNext,
+#timeLimitNext {
   grid-column: 4;
-}
-
-#roundsSelection,
-#timeControlSelection,
-#evalSelection {
-  cursor: default;
 }
 
 .singlePlayerOptionButtons div {
@@ -417,7 +415,8 @@ body {
   align-items: center;
   background-color: #398712;
   border-radius: 5px;
-  padding-right: 2px;
+  font-family: "Oswald" !important;
+  font-weight: 500;
 }
 
 #gameMode {
@@ -756,6 +755,8 @@ img.light-shadow {
   border-radius: 5px;
   color: var(--white);
   font-size: clamp(1rem, 0.662rem + 1.569vw, 1.25rem); /* min 345 max 600 */
+  font-family: "Oswald" !important;
+  font-weight: 500;
 }
 
 .eloButton:hover {

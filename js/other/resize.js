@@ -64,19 +64,19 @@ endlessOptionObserver.observe(document.getElementById("roundsSelection"), {
   childList: true,
 });
 
-function difficultyOptionCheck() {
-  const div = document.getElementById("evalSelection");
-  if (div.textContent === "Hard") {
-    div.classList.add("hardStyle");
-  } else {
-    div.classList.remove("hardStyle");
-  }
-}
+// function difficultyOptionCheck() {
+//   const div = document.getElementById("evalSelection");
+//   if (div.textContent === "Hard") {
+//     div.classList.add("hardStyle");
+//   } else {
+//     div.classList.remove("hardStyle");
+//   }
+// }
 
-const difficultyOptionObserver = new MutationObserver(difficultyOptionCheck);
-difficultyOptionObserver.observe(document.getElementById("evalSelection"), {
-  childList: true,
-});
+// const difficultyOptionObserver = new MutationObserver(difficultyOptionCheck);
+// difficultyOptionObserver.observe(document.getElementById("evalSelection"), {
+//   childList: true,
+// });
 
 window.addEventListener("load", function () {
   var body = document.body;

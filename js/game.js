@@ -58,7 +58,8 @@ let longestStreak = 0;
 
 let maxRounds = 0;
 let gameTimeControls = "";
-let gameDifficulty = "";
+let gameTimeLimit = "";
+let gameEvaluation = "";
 let livesCount = 3;
 let partialLivesCount = 0;
 let currentRound = 0;
@@ -77,7 +78,8 @@ function resetVariables() {
 
   maxRounds = 0;
   gameTimeControls = "";
-  gameDifficulty = "";
+  gameTimeLimit = "";
+  gameEvaluation = "";
   livesCount = 3;
   currentRound = 0;
   partialLivesCount = 0;
@@ -98,7 +100,8 @@ singlePlayerStartButton.addEventListener("click", async () => {
   resetVariables();
   maxRounds = parseInt(gameConfigs.rounds);
   gameTimeControls = gameConfigs.timeControls;
-  gameDifficulty = gameConfigs.difficulty;
+  gameTimeLimit = gameConfigs.timeLimit;
+  gameEvaluation = gameConfigs.evaluation;
   gameArray = await fetchGames(gameTimeControls, maxRounds);
   generateHeartIcons();
   newGame(gameArray[currentRound]);
@@ -294,14 +297,20 @@ function eloButtonClickHandler(button, correctElo) {
 
 export function endRound(answer, button) {
   roundEnded = true;
-
   const correctScore = 1000;
-
   let timeBonus;
-  if (remainingTimePercentage === undefined) {
-    timeBonus = 500;
+  if (gameTimeLimit === "None") {
+    timeBonus = 0;
   } else {
-    timeBonus = Math.round(500 * remainingTimePercentage);
+    if (remainingTimePercentage === undefined) {
+      timeBonus = 500;
+    } else {
+      timeBonus = Math.round(500 * remainingTimePercentage);
+    }
+  }
+
+  if (gameTimeLimit === "45s") {
+    timeBonus = timeBonus * 2;
   }
 
   let streakBonus = 0;
@@ -534,8 +543,20 @@ function clearAnswerBanner() {
 
 async function newGame(gameDict) {
   currentRound++;
-  const time = gameDifficulty === "Normal" ? 60 : 45;
-  const evaluation = gameDifficulty === "Normal" ? true : false;
+  let time;
+  let evaluation;
+  if (gameTimeLimit === "90s") {
+    time = 90;
+  } else if (gameTimeLimit === "45s") {
+    time = 45;
+  } else {
+    time = 0;
+  }
+  if (gameEvaluation === "Yes") {
+    evaluation = true;
+  } else {
+    evaluation = false;
+  }
   const moves = gameDict.Moves;
   const orientation = getRandomElement(["white", "black"]);
   const site = gameDict.Site;
@@ -553,6 +574,7 @@ async function newGame(gameDict) {
   adjustScreen();
   clearCountdown();
   startCountdown(time);
+  console.log(correctElo);
   roundEnded = false;
 }
 
