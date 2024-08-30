@@ -17,6 +17,9 @@ const timeLimitNext = document.getElementById("timeLimitNext");
 const timeLimitPrev = document.getElementById("timeLimitPrev");
 const musicToggleButton = document.getElementById("musicToggleButton");
 const music = document.getElementById("music");
+const fullscreenToggleButton = document.getElementById(
+  "fullscreenToggleButton"
+);
 
 // Add event listener to each button
 gameModesButtons.forEach((button) => {
@@ -411,9 +414,34 @@ enableSelectionWheelEvents();
 musicToggleButton.addEventListener("click", () => {
   musicToggleButton.classList.toggle("active");
   if (music.paused) {
+    musicToggleButton.title = "Turn Music Off";
     music.volume = 0.7; // Set the volume to 0.7
     music.play();
   } else {
+    musicToggleButton.title = "Turn Music On";
     music.pause();
+  }
+});
+
+fullscreenToggleButton.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    // Enter fullscreen mode
+    document.documentElement.requestFullscreen().catch((err) => {
+      console.error(
+        `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
+      );
+    });
+  } else {
+    // Exit fullscreen mode
+    document.exitFullscreen();
+  }
+});
+
+// Update button text and tooltip based on fullscreen status
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    fullscreenToggleButton.title = "Exit Fullscreen"; // Update tooltip
+  } else {
+    fullscreenToggleButton.title = "Fullscreen"; // Update tooltip
   }
 });

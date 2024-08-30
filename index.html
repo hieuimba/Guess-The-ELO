@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Guess The ELO</title>
+    <title>Guess The ELO - Chess Quiz Game</title>
+    <meta name="description" content="Guess the Elo rating of chess matches and see how high you can score!">
     <link rel=" icon" href="images/favicon.ico" type="image/x-icon">
 
     <link href="css/styles.css" rel="stylesheet" type="text/css">
@@ -14,7 +15,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.slate.min.css" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47G6RBR0D7">
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-47G6RBR0D7');
+    </script>
 </head>
 
 <body>
@@ -24,7 +36,8 @@
         <div id="homeScreen">
             <div id="homeHeader">
                 <div id="settings">
-                    <button id="musicToggleButton">&#127925;</button>
+                    <button id="musicToggleButton" title="Turn Music On">&#127925;</button>
+                    <button id="fullscreenToggleButton" title="Fullscreen">&#x26F6;</button>
                 </div>
             </div>
             <div id="title">

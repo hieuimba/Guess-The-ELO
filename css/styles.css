@@ -85,6 +85,15 @@ body {
   text-decoration: underline;
 }
 
+#howToPlayModal article,
+#creditModal article,
+#contactModal article {
+  max-height: 75dvh; /* Set maximum height to 85% of the dynamic viewport height */
+  overflow-y: auto; /* Add vertical scrollbar if content exceeds max-height */
+  display: flex; /* Ensures the dialog content respects max-height and scrolls properly */
+  flex-direction: column; /* Aligns content vertically */
+}
+
 #homeScreen,
 #gameScreen,
 #resultScreen {
@@ -103,7 +112,8 @@ body {
   margin-right: 3px;
 }
 
-#musicToggleButton {
+#musicToggleButton,
+#fullscreenToggleButton {
   font-size: 1.25rem;
   position: relative;
   border: 0;
@@ -111,6 +121,7 @@ body {
   background: none;
   color: transparent;
   text-shadow: 0 0 0 var(--white);
+  margin-left: 0.75rem;
 }
 #musicToggleButton::after {
   content: "";
@@ -344,7 +355,10 @@ body {
 }
 
 .optionPlaceholder {
-  padding-top: calc(3 * clamp(1.2rem, 0.659rem + 2.51vw, 1.6rem) + 4 * 1.25rem);
+  padding-top: calc(
+    3 * clamp(1.2rem, 0.659rem + 2.51vw, 1.6rem) + 4 *
+      clamp(1rem, 0.662rem + 1.569vw, 1.25rem)
+  );
 }
 
 #roundsSelection.endlessStyle {
