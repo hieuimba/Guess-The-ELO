@@ -10,7 +10,7 @@
 
 Guess the Elo is a casual quiz game where you guess the Elo rating of a chess match. Test your chess knowledge and intuition by earning the most points across rounds or by surviving the longest in Endless mode!
 
-Play here - https://hieuimba.itch.io/guess-the-elo
+Play here - https://guesstheelo.com
 
 ## Features
 
