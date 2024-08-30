@@ -574,7 +574,7 @@ async function newGame(gameDict) {
   adjustScreen();
   clearCountdown();
   startCountdown(time);
-  console.log(correctElo);
+  // console.log(correctElo);
   roundEnded = false;
 }
 
