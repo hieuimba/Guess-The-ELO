@@ -19,9 +19,6 @@ Play here - https://hieuimba.itch.io/guess-the-elo
 - Two game modes:
     - Classic: Aim for the highest score across a set number of rounds.
     - Endless: Start with 3 lives and try to survive as long as possible. Earn additional lives with correct guesses.
-- Two difficulties:
-    - Normal: Casual gameplay with evaluation provided
-    - Hard: Fast-paced gameplay with no evaluation!
 - Playable on both computer and mobile.
 
 
