@@ -15,8 +15,11 @@ let visibleModal = null;
 
 const creditsButton = document.getElementById("creditsButton");
 const contactButton = document.getElementById("contactButton");
+const howToPlayButton = document.getElementById("howToPlayButton");
 const creditsCloseButton = document.getElementById("creditsCloseButton");
 const contactCloseButton = document.getElementById("contactCloseButton");
+const howToPlayCloseButton = document.getElementById("howToPlayCloseButton");
+
 creditsButton.addEventListener("click", (event) => {
   event.preventDefault();
   const modal = document.getElementById("creditModal");
@@ -41,6 +44,20 @@ contactButton.addEventListener("click", (event) => {
 contactCloseButton.addEventListener("click", (event) => {
   event.preventDefault();
   const modal = document.getElementById("contactModal");
+  if (!modal) return;
+  modal && (modal.open ? closeModal(modal) : openModal(modal));
+});
+
+howToPlayButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const modal = document.getElementById("howToPlayModal");
+  if (!modal) return;
+  modal && (modal.open ? closeModal(modal) : openModal(modal));
+});
+
+howToPlayCloseButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const modal = document.getElementById("howToPlayModal");
   if (!modal) return;
   modal && (modal.open ? closeModal(modal) : openModal(modal));
 });

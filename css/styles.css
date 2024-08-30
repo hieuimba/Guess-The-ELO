@@ -76,6 +76,7 @@ body {
 }
 
 #creditsButton,
+#howToPlayButton,
 #contactButton {
   border: 0;
   padding: 0;
@@ -343,10 +344,7 @@ body {
 }
 
 .optionPlaceholder {
-  padding-top: calc(
-    2 * clamp(1.6rem, 1.059rem + 2.51vw, 2rem) + 3 *
-      clamp(1rem, 0.662rem + 1.569vw, 1.25rem)
-  );
+  padding-top: calc(3 * clamp(1.2rem, 0.659rem + 2.51vw, 1.6rem) + 4 * 1.25rem);
 }
 
 #roundsSelection.endlessStyle {

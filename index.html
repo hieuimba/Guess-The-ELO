@@ -145,13 +145,13 @@
                 </div>
                 <!-- multiPlayerOptions -->
                 <div id="multiPlayerOptions" style="display: none">
-                    <div class="optionTitle">Coming Soon</div>
+                    <div class="optionTitle">Coming Soon!</div>
                     <div class="optionPlaceholder"></div>
                     <button id="multiplayerStartButton" class="startButton">Find Match</button>
                 </div>
                 <!-- privateRoomOptions -->
                 <div id="privateRoomOptions" style="display: none">
-                    <div class="optionTitle">Coming Soon</div>
+                    <div class="optionTitle">Coming Soon!</div>
                     <div class="optionPlaceholder"></div>
                     <button id="privateRoomButton" class="startButton">Create Room</button>
                 </div>
@@ -212,6 +212,42 @@
             <button id="mainMenuButton">Main Menu</button>
         </div>
         <div id="footer">
+            <div id="howToPlay">
+                <button id="howToPlayButton">How To Play</button>
+                <dialog id="howToPlayModal">
+                    <article>
+                        <header>
+                            <button id="howToPlayCloseButton" aria-label="Close" rel="prev"></button>
+                        </header>
+                        <p><strong>Guess the ELO</strong> is a casual quiz game where you guess the Elo rating of a
+                            chess match. Test your chess knowledge and intuition by earning the most points across
+                            rounds or by surviving the longest in Endless mode!</p>
+                        <p><strong>How To Play:</strong>
+                        </p>
+                        <ul>
+                            <li>Each round presents you with a random chess game along with four Elo ratings for that
+                                match.</li>
+                            <li>Guess the correct Elo rating to earn points.</li>
+                            <li>All Elo ratings are from Lichess, which starts at 1500.</li>
+                        </ul>
+                        <p><strong>Features:</strong>
+                        </p>
+                        <ul>
+                            <li>Large collection of chess games: Curated from Lichess’s database and updated monthly
+                            </li>
+                            <li>Wide ELO range to guess from: from 200 to 3000 ELO!</li>
+                            <li>Two game modes:
+                                <ul>
+                                    <li>Classic: Aim for the highest score across a set number of rounds.</li>
+                                    <li>Endless: Start with 3 lives and try to survive as long as possible. Earn
+                                        additional lives with correct guesses.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>Have fun!</p>
+                    </article>
+                </dialog>
+            </div>
             <div id="credits">
                 <button id="creditsButton">Credits</button>
                 <dialog id="creditModal">
@@ -258,7 +294,7 @@
                         <p>Thank you for your interest!
                         </p>
 
-                        <p>If you have any feedback or questions, feel free to email me at: <a
+                        <p>If you encountered bugs or have any feedback, feel free to email me at: <a
                                 href="mailto:hieuimba@gmail.com">hieuimba@gmail.com</a>
                         </p>
 
