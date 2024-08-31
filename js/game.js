@@ -95,6 +95,7 @@ function playSound(elementId) {
 }
 
 singlePlayerStartButton.addEventListener("click", async () => {
+  document.title = "Guess The ELO";
   playSound("gameStartSound");
   disableStartGameButton();
   resetVariables();
@@ -143,6 +144,7 @@ mainMenuButton.addEventListener("click", () => {
   resultScreen.style.display = "none";
   homeScreen.style.display = "block";
   footer.style.display = "flex";
+  document.title = "Play Guess The ELO";
   adjustScreen();
 });
 

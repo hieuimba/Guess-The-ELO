@@ -24,6 +24,7 @@ export function startCountdown(secondsLeft) {
     countdownBar.max = totalSecondsLeft;
     let wholeSecondsLeft;
     updateCountdownColor(green, "#f2f2f2");
+    document.title = `Guess The ELO - ${Math.floor(totalSecondsLeft)}`;
 
     countdown = setInterval(() => {
       secondsLeft = (secondsLeft - 0.1).toFixed(2); // Subtract 0.1 seconds
