@@ -6,70 +6,53 @@
 export class SimpleTracker {
   constructor() {
     this.sessionStartTime = Date.now();
-    this.roundStartTime = null;
+    this.gameStartTime = null;
+    this.correctAnswers = 0;
+    this.totalRounds = 0;
+    this.longestStreak = 0;
+    this.currentStreak = 0;
     this.debug = false; // Set to true to see events in console
   }
 
   /**
-   * Main tracking method
-   * @param {string} category - Event category (game, ui, daily)
-   * @param {string} action - Event action (start, complete, click, etc.)
-   * @param {object} data - Additional event parameters
+   * Main tracking method - simplified to only essential dimensions
    */
-  track(category, action, data = {}) {
+  track(eventName, data = {}) {
     try {
-      const event = {
-        event_category: category,
-        event_label: action,
-        timestamp: Date.now(),
-        session_duration: Math.floor((Date.now() - this.sessionStartTime) / 1000),
-        ...data
-      };
-
-      // Send to GA4
+      // Send to GA4 with only essential dimensions
       if (window.gtag) {
-        // Use GA4 recommended event names where applicable
-        let eventName = `${category}_${action}`;
-
-        // Map to GA4 standard events when possible
-        if (category === 'game' && action === 'start') {
-          eventName = 'level_start';
-          event.level_name = data.mode || 'unknown';
-        } else if (category === 'game' && action === 'complete') {
-          eventName = 'level_complete';
-          event.level_name = data.mode || 'unknown';
-          event.score = data.finalScore || 0;
-          event.success = (data.correctCount > 0);
-        } else if (action === 'share') {
-          eventName = 'share';
-          event.method = 'clipboard';
-          event.content_type = 'game_result';
-        }
-
-        gtag('event', eventName, event);
+        gtag('event', eventName, data);
 
         if (this.debug) {
-          console.log('📊 GA4 Event:', eventName, event);
+          console.log('📊 GA4 Event:', eventName, data);
         }
       }
     } catch (err) {
       // Silently handle errors - don't break the game for analytics failures
       if (this.debug) {
-        console.warn(`Failed to track ${category}/${action}:`, err);
+        console.warn(`Failed to track ${eventName}:`, err);
       }
     }
   }
 
-  // Convenience methods for common events
+  // Reset tracking state for new game
+  resetGameState() {
+    this.gameStartTime = Date.now();
+    this.correctAnswers = 0;
+    this.totalRounds = 0;
+    this.longestStreak = 0;
+    this.currentStreak = 0;
+  }
 
+  // Track game start with simplified dimensions
   trackGameStart(mode, options = {}) {
     try {
-      this.roundStartTime = Date.now();
-      this.track('game', 'start', {
-        mode,
+      this.resetGameState();
+
+      this.track('game_start', {
+        game_mode: mode,
         time_limit: options.timeLimit || 'none',
-        evaluation: options.evaluation || 'unknown',
-        time_control: options.timeControl || 'any'
+        evaluation_enabled: options.evaluation === 'yes'
       });
     } catch (err) {
       if (this.debug) {
@@ -78,25 +61,22 @@ export class SimpleTracker {
     }
   }
 
+  // Update internal state for round completion (no individual round tracking)
   trackRoundComplete(roundData) {
     try {
-      const roundDuration = this.roundStartTime ?
-        Math.floor((Date.now() - this.roundStartTime) / 1000) : 0;
+      this.totalRounds++;
 
-      this.track('game', 'round_complete', {
-        mode: roundData.mode,
-        round: roundData.round,
-        correct: roundData.correct,
-        time_remaining: roundData.timeRemaining || 0,
-        round_duration: roundDuration,
-        elo_guessed: roundData.eloGuessed,
-        elo_correct: roundData.eloCorrect,
-        points_earned: roundData.pointsEarned || 0,
-        streak: roundData.streak || 0
-      });
+      if (roundData.correct) {
+        this.correctAnswers++;
+        this.currentStreak++;
+        if (this.currentStreak > this.longestStreak) {
+          this.longestStreak = this.currentStreak;
+        }
+      } else {
+        this.currentStreak = 0;
+      }
 
-      // Reset round timer for next round
-      this.roundStartTime = Date.now();
+      // No event sent for individual rounds - only update internal state
     } catch (err) {
       if (this.debug) {
         console.warn('Failed in trackRoundComplete:', err);
@@ -104,15 +84,22 @@ export class SimpleTracker {
     }
   }
 
+  // Track game completion with aggregated metrics
   trackGameComplete(gameData) {
     try {
-      this.track('game', 'complete', {
-        mode: gameData.mode,
+      const sessionDuration = Math.floor((Date.now() - this.gameStartTime) / 1000);
+      const accuracyRate = this.totalRounds > 0
+        ? Math.round((this.correctAnswers / this.totalRounds) * 100)
+        : 0;
+
+      this.track('game_complete', {
+        game_mode: gameData.mode,
         final_score: gameData.finalScore,
-        rounds_played: gameData.roundsPlayed,
-        correct_count: gameData.correctCount,
-        longest_streak: gameData.longestStreak || 0,
-        total_duration: Math.floor((Date.now() - this.sessionStartTime) / 1000)
+        rounds_played: this.totalRounds,
+        accuracy_rate: accuracyRate,
+        longest_streak: this.longestStreak,
+        session_duration_seconds: sessionDuration,
+        game_completed: true
       });
     } catch (err) {
       if (this.debug) {
@@ -121,29 +108,52 @@ export class SimpleTracker {
     }
   }
 
+  // Track game abandonment
   trackGameAbandon(mode, currentRound) {
-    this.track('game', 'abandon', {
-      mode,
-      round_abandoned: currentRound,
-      session_duration: Math.floor((Date.now() - this.sessionStartTime) / 1000)
-    });
+    try {
+      const sessionDuration = Math.floor((Date.now() - this.gameStartTime) / 1000);
+
+      this.track('game_abandon', {
+        game_mode: mode,
+        round_abandoned_at: currentRound,
+        session_duration_seconds: sessionDuration,
+        game_completed: false
+      });
+    } catch (err) {
+      if (this.debug) {
+        console.warn('Failed in trackGameAbandon:', err);
+      }
+    }
   }
 
-  trackButtonClick(buttonId, context = {}) {
-    this.track('ui', 'button_click', {
-      button_id: buttonId,
-      ...context
-    });
-  }
-
+  // Simplified daily challenge tracking
   trackDailyChallenge(data) {
-    this.track('daily', 'played', {
-      challenge_number: data.challengeNumber,
-      streak: data.streak,
-      score: data.score,
-      correct: data.correct,
-      time_used: data.timeUsed
-    });
+    try {
+      this.track('daily_complete', {
+        daily_challenge_number: data.challengeNumber,
+        daily_streak_count: data.streak,
+        final_score: data.score,
+        game_completed: true
+      });
+    } catch (err) {
+      if (this.debug) {
+        console.warn('Failed in trackDailyChallenge:', err);
+      }
+    }
+  }
+
+  // Minimal share tracking - just game mode and score
+  trackShare(mode, score) {
+    try {
+      this.track('share', {
+        game_mode: mode,
+        final_score: score
+      });
+    } catch (err) {
+      if (this.debug) {
+        console.warn('Failed in trackShare:', err);
+      }
+    }
   }
 
   enableDebug() {

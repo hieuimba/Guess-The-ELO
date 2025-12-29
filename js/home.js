@@ -350,8 +350,6 @@ musicToggleButton.addEventListener("click", () => {
     music.pause();
   }
 
-  // Track music toggle
-  tracker.trackButtonClick("music_toggle", { state: musicState });
 });
 
 // Fullscreen toggle
@@ -366,8 +364,6 @@ fullscreenToggleButton.addEventListener("click", () => {
     document.exitFullscreen();
   }
 
-  // Track fullscreen toggle
-  tracker.trackButtonClick("fullscreen_toggle", { state: isEnteringFullscreen ? "enter" : "exit" });
 });
 
 // Update button text based on fullscreen status

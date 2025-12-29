@@ -269,12 +269,8 @@ mainMenuButton.addEventListener("click", () => {
 });
 
 shareButton?.addEventListener("click", async () => {
-  // Track share action
-  tracker.track('ui', 'share', {
-    mode: currentGameMode,
-    score: gameScore,
-    rounds_played: currentRound
-  });
+  // Track share action with minimal dimensions
+  tracker.trackShare(currentGameMode, gameScore);
   await shareResult();
 });
 
